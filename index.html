@@ -1,443 +1,182 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Carô đẹp — index.html</title>
-  <style>
-    :root{
-      --bg:#0f1724; --card:#0b1220; --accent:#10b981; --muted:#94a3b8; --glass: rgba(255,255,255,0.03);
-      --glass-2: rgba(255,255,255,0.02);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:#e6eef8;background:linear-gradient(180deg,#071029 0%, #07172a 60%);}
-    .app{max-width:1100px;margin:28px auto;padding:24px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));border-radius:14px;box-shadow:0 8px 30px rgba(2,6,23,0.7);display:grid;grid-template-columns:360px 1fr;gap:20px}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-    h1{font-size:20px;margin:0;color:var(--accent);letter-spacing:0.6px}
-    .panel{background:var(--card);padding:18px;border-radius:12px}
-    .controls{display:flex;flex-direction:column;gap:12px}
-    label{font-size:13px;color:var(--muted)}
-    select,input[type=number]{width:100%;padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:var(--glass);color:#d6e7ff}
-    button{padding:10px 12px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),#06b6d4);color:#021026;font-weight:600;cursor:pointer}
-    button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.05);color:var(--muted)}
-
-    /* board area */
-    .board-wrap{display:flex;flex-direction:column;gap:12px;padding:18px}
-    .board-card{background:linear-gradient(180deg,var(--glass),var(--glass-2));padding:12px;border-radius:12px;display:flex;flex-direction:column;align-items:center}
-    .board{display:grid;touch-action:none;border-radius:8px;background:linear-gradient(180deg,#07122a,#031022);padding:8px}
-    .cell{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:6px;margin:3px;user-select:none;cursor:pointer;transition:transform .08s ease, background .12s ease}
-    .cell:hover{transform:translateY(-3px)}
-    .cell.empty{background:linear-gradient(180deg,#0b1626,#08121b);border:1px solid rgba(255,255,255,0.02)}
-    .cell.x{color:#ffd166;font-size:20px;font-weight:700}
-    .cell.o{color:#90e0ef;font-size:20px;font-weight:700}
-    .status{font-size:14px;color:#cfe9ff}
-    .footer{display:flex;gap:8px;align-items:center}
-    .small{font-size:12px;color:var(--muted)}
-
-    /* responsive */
-    @media (max-width:980px){.app{grid-template-columns:1fr;max-width:920px;padding:12px} .board{transform:scale(0.95)} }
-    @media (max-width:480px){.cell{width:28px;height:28px;margin:2px} }
-
-    /* nice highlights on winning line */
-    .win{box-shadow:0 0 18px 4px rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.18);}
-
-    /* online area */
-    .signal{display:flex;flex-direction:column;gap:8px}
-    textarea{width:100%;min-height:84px;padding:10px;border-radius:8px;background:transparent;border:1px dashed rgba(255,255,255,0.04);color:#e6eef8}
-    .row{display:flex;gap:8px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Caro Pro Online</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+:root{
+  --x:#ff4d4d;--o:#0099ff;--bg:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{margin:0;height:100vh;display:flex;justify-content:center;align-items:center;background:var(--bg);color:#fff}
+#app{text-align:center;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);padding:30px;border-radius:25px;box-shadow:var(--shadow);max-width:500px;width:90%}
+h1{font-size:2.5rem;margin-bottom:15px;text-shadow:0 2px 4px rgba(0,0,0,.3)}
+.mode-btn{background:#fff;color:#667eea;border:none;padding:14px 28px;margin:8px;font-size:1rem;border-radius:30px;font-weight:700;cursor:pointer;transition:.3s}
+.mode-btn:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+#board{display:none;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px auto;width:min(90vw,350px)}
+.cell{background:rgba(255,255,255,.95);border-radius:15px;font-size:3rem;font-weight:700;height:100px;line-height:100px;cursor:pointer;transition:.2s}
+.cell.x{color:var(--x)}.cell.o{color:var(--o)}
+.cell.winner{background:#2ecc71;color:#fff;animation:pulse .6s infinite}
+@keyframes pulse{50%{transform:scale(1.1)}}
+#score{display:none;justify-content:space-around;margin:15px 0;font-size:1.1rem}
+#info{margin:10px 0;font-size:1.1rem}
+#online{display:none}#online input{padding:10px;border-radius:20px;border:none;margin:5px;width:180px}
+.ctrl-btn{background:#fff;color:#667eea;border:none;padding:10px 20px;margin:5px;border-radius:20px;font-weight:600;cursor:pointer}
+.ctrl-btn:hover{opacity:.9}
+</style>
 </head>
 <body>
-  <div class="app">
-    <div>
-      <header><h1>Carô đẹp — 1 file index.html</h1><div class="small">Phiên bản: 1.0</div></header>
-
-      <div class="panel controls">
-        <div>
-          <label>Kích thước bàn (board size)</label>
-          <input id="size" type="number" min="5" max="25" value="15">
-        </div>
-        <div>
-          <label>Chuỗi thắng (in-a-row)</label>
-          <input id="winlen" type="number" min="3" max="10" value="5">
-        </div>
-        <div>
-          <label>Chế độ</label>
-          <select id="mode">
-            <option value="human">2 người (cùng máy)</option>
-            <option value="ai">Chơi với AI</option>
-            <option value="online">Online (qua WebRTC - dùng copy/paste signaling)</option>
-          </select>
-        </div>
-        <div id="aiOptions" style="display:none">
-          <label>Độ khó AI</label>
-          <select id="ailevel">
-            <option value="1">Dễ</option>
-            <option value="2" selected>Trung bình</option>
-            <option value="3">Khó</option>
-          </select>
-        </div>
-
-        <div style="display:flex;gap:8px">
-          <button id="newBtn">Bắt đầu / Tạo bàn</button>
-          <button id="undoBtn" class="ghost">Undo</button>
-        </div>
-
-        <div style="margin-top:8px" class="small">Trạng thái: <span id="status">Sẵn sàng</span></div>
-      </div>
-
-      <div style="margin-top:12px" class="panel">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-          <div class="small">Tùy chọn online</div>
-          <div class="small">Mạng: WebRTC (copy/paste signaling)</div>
-        </div>
-        <div class="signal">
-          <div><label>Local signal (Gửi cho đối thủ)</label><textarea id="localSignal" readonly placeholder="Tạo offer/answer"></textarea></div>
-          <div><label>Remote signal (Dán signal từ đối thủ)</label><textarea id="remoteSignal" placeholder="Dán offer/answer vào đây"></textarea></div>
-          <div class="row">
-            <button id="createOffer" class="ghost">Tạo Offer</button>
-            <button id="accept" class="ghost">Chấp nhận Signal</button>
-            <button id="closeConn" class="ghost">Đóng kết nối</button>
-          </div>
-          <div class="small">Lưu ý: copy/paste cả JSON. Nếu muốn chơi trên 2 máy, chọn chế độ "Online" ở trên.</div>
-        </div>
-      </div>
-
-      <div style="margin-top:12px" class="panel">
-        <div class="small">Hướng dẫn nhanh:</div>
-        <ol style="color:var(--muted);font-size:13px">
-          <li>Chọn kích thước &amp; chế độ, nhấn "Bắt đầu".</li>
-          <li>Chế độ AI: AI cố gắng thắng (minimax + heuristic).</li>
-          <li>Online: Tạo Offer trên máy A, gửi text cho máy B; B dán và nhấn "Chấp nhận Signal", sau đó B gửi answer cho A.</li>
-          <li>Muốn đưa code lên GitHub: tạo repo mới và upload file index.html (hướng dẫn trong phần mô tả).</li>
-        </ol>
-      </div>
-    </div>
-
-    <div>
-      <div class="board-wrap">
-        <div class="board-card">
-          <div style="display:flex;justify-content:space-between;width:100%;align-items:center;margin-bottom:10px">
-            <div class="status">Lượt: <strong id="turnLabel">—</strong></div>
-            <div class="footer"><div class="small">X = Bạn / O = Đối thủ</div></div>
-          </div>
-
-          <div id="board" class="board" style="width:100%;max-width:820px"></div>
-        </div>
-
-        <div style="display:flex;justify-content:space-between;gap:8px">
-          <div class="panel" style="flex:1">
-            <div class="small">Lịch sử nước đi</div>
-            <div id="moves" style="margin-top:8px;color:var(--muted);max-height:140px;overflow:auto;font-size:13px"></div>
-          </div>
-          <div class="panel" style="width:220px">
-            <div class="small">Điều khiển</div>
-            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-              <button id="hintBtn" class="ghost">Gợi ý nước đi (AI)</button>
-              <button id="resetBtn" class="ghost">Đặt lại bàn</button>
-              <button id="exportBtn" class="ghost">Xuất JSON ván chơi</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+<div id="app">
+  <h1>Caro Pro Online</h1>
+  <div id="menu">
+    <button class="mode-btn" onclick="startAI()">🤖 Đấu AI</button>
+    <button class="mode-btn" onclick="start2P()">👥 2 Người</button>
+    <button class="mode-btn" onclick="showOnline()">🌍 Online</button>
   </div>
+  <div id="online">
+    <input id="room" placeholder="Nhập mã phòng">
+    <button class="ctrl-btn" onclick="joinRoom()">Vào phòng</button>
+    <button class="ctrl-btn" onclick="createRoom()">Tạo phòng</button>
+    <div id="share" style="margin-top:10px;font-size:.9rem"></div>
+  </div>
+  <div id="score"><span>👤 X: <b id="sx">0</b></span><span id="soText">🤖 O: <b id="so">0</b></span></div>
+  <div id="info"></div>
+  <div id="board"></div>
+  <div id="control" style="display:none;margin-top:15px">
+    <button class="ctrl-btn" onclick="resetBoard()">🔄 Ván mới</button>
+    <button class="ctrl-btn" onclick="backMenu()">🏠 Menu</button>
+  </div>
+</div>
 
 <script>
-// ---- CORE GAME LOGIC ----
-const state = {
-  size:15, winLen:5, board:[], turn:1, // 1 = X, -1 = O
-  history:[], mode:'human', aiLevel:2, conn:null, peer:null, dataChannel:null, onlineRole:null
-};
+/* ====== STATE ====== */
+let board,cur,active,aiOnline,peer,conn,roomId;
+const win=[ [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] ];
+const $=id=>document.getElementById(id);
+const show=(id,on=true)=>$(id).style.display=on?'block':'none';
+const info=t=>$('info').textContent=t;
 
-const elems = {};
-function $(id){return document.getElementById(id)}
+/* ====== MENU ====== */
+function startAI(){aiOnline=false;initGame('🤖 AI đang chờ...');}
+function start2P(){aiOnline=false;initGame('👥 2 người chơi');}
+function showOnline(){show('menu',false);show('online',true);}
+function backMenu(){
+  show('menu');show('board',false);show('score',false);show('control',false);show('online',false);
+  location.hash='';if(peer)peer.destroy();peer=null;
+}
+function createRoom(){roomId=Math.random().toString(36).slice(2,8);$('room').value=roomId;joinRoom();}
+function joinRoom(){
+  roomId=$('room').value.trim().toLowerCase();if(!roomId){alert('Nhập mã phòng');return;}
+  initPeer(roomId,true);
+}
 
-function initUI(){
-  elems.size = $('size'); elems.winlen = $('winlen'); elems.mode = $('mode'); elems.ailevel = $('ailevel');
-  elems.newBtn = $('newBtn'); elems.undoBtn = $('undoBtn'); elems.boardWrap = $('board'); elems.status = $('status'); elems.turnLabel = $('turnLabel'); elems.moves = $('moves');
-  elems.hintBtn = $('hintBtn'); elems.resetBtn = $('resetBtn'); elems.exportBtn = $('exportBtn'); elems.aiOptions = $('aiOptions');
-  elems.localSignal = $('localSignal'); elems.remoteSignal = $('remoteSignal'); elems.createOffer = $('createOffer'); elems.accept = $('accept'); elems.closeConn = $('closeConn');
-
-  elems.mode.addEventListener('change',()=>{
-    state.mode = elems.mode.value; elems.aiOptions.style.display = state.mode==='ai' ? 'block':'none';
-    updateStatus('Chế độ: '+state.mode);
+/* ====== GAME ====== */
+function initGame(msg){
+  show('menu',false);show('board');show('score');show('control');
+  board=Array(9).fill('');cur='X';active=true;
+  $('board').innerHTML='';board.forEach((_,i)=>{
+    const c=document.createElement('div');c.className='cell';c.onclick=()=>clickCell(i);
+    $('board').appendChild(c);
   });
-  elems.newBtn.addEventListener('click',setup);
-  elems.undoBtn.addEventListener('click',undo);
-  elems.hintBtn.addEventListener('click',()=>{ const best = findBestMove(state.turn); if(best) highlightHint(best.x,best.y) });
-  elems.resetBtn.addEventListener('click',()=>{ setup() });
-  elems.exportBtn.addEventListener('click',exportGame);
-  elems.createOffer.addEventListener('click',createOffer);
-  elems.accept.addEventListener('click',acceptSignal);
-  elems.closeConn.addEventListener('click',closeConnection);
-  elems.ailevel.addEventListener('change',()=>state.aiLevel = Number(elems.ailevel.value));
+  updateScore();info(msg);
 }
-
-function setup(){
-  state.size = Math.max(5, Math.min(25, Number(elems.size.value)||15));
-  state.winLen = Math.max(3, Math.min(10, Number(elems.winlen.value)||5));
-  state.board = Array(state.size).fill(0).map(()=>Array(state.size).fill(0));
-  state.history = []; state.turn = 1; state.mode = elems.mode.value; state.aiLevel = Number(elems.ailevel.value);
-  elems.moves.innerHTML=''; elems.localSignal.value=''; elems.remoteSignal.value='';
-  renderBoard(); updateTurn(); updateStatus('Bắt đầu ván mới');
+function clickCell(i){
+  if(!active||board[i]||(aiOnline&&cur==='O'))return;
+  move(i);
+  if(!aiOnline&&cur==='O'&&!conn)setTimeout(()=>aiMove(),400);
+  if(conn)conn.send({type:'move',i});
 }
-
-function renderBoard(){
-  const sz = state.size;
-  elems.boardWrap.style.gridTemplateColumns = `repeat(${sz}, 1fr)`;
-  elems.boardWrap.innerHTML='';
-  for(let y=0;y<sz;y++){
-    for(let x=0;x<sz;x++){
-      const div = document.createElement('div'); div.className='cell empty'; div.dataset.x=x; div.dataset.y=y;
-      div.addEventListener('click',onCellClick);
-      updateCell(div,x,y);
-      elems.boardWrap.appendChild(div);
+function move(i){
+  board[i]=cur;render();if(checkWin())return;
+  cur=cur==='X'?'O':'X';updateScore();
+}
+function render(){
+  document.querySelectorAll('.cell').forEach((c,i)=>{
+    c.textContent=board[i];c.className='cell '+(board[i]||'');
+  });
+}
+function checkWin(){
+  for(let w of win){
+    const[a,b,c]=w;if(board[a]&&board[a]===board[b]&&board[a]===board[c]){
+      w.forEach(i=>document.querySelectorAll('.cell')[i].classList.add('winner'));
+      active=false;const p=board[a];scores[p]++;updateScore();
+      info(p==='X'?'👤 Bạn thắng!':aiOnline?'👤 Đối thủ thắng!':'🤖 AI thắng!');
+      return true;
     }
   }
-}
-
-function updateCell(div,x,y){
-  const v = state.board[y][x]; div.className = 'cell ' + (v===0?'empty': (v===1?'x':'o'));
-  div.textContent = v===1? 'X': (v===-1? 'O':'');
-}
-
-function onCellClick(e){
-  const x = Number(e.currentTarget.dataset.x), y = Number(e.currentTarget.dataset.y);
-  if(state.mode==='online' && !state.dataChannel){ updateStatus('Chưa kết nối online'); return; }
-  if(state.board[y][x]!==0) return;
-  if(state.mode==='ai' && state.turn===-1) return; // if we decide AI is O
-  makeMove(x,y,state.turn,true);
-}
-
-function makeMove(x,y,player,fromUser){
-  if(state.board[y][x]!==0) return false;
-  state.board[y][x]=player; state.history.push({x,y,player});
-  updateCell(getCellDiv(x,y),x,y); appendMove(x,y,player);
-  const res = checkWin(x,y,player);
-  if(res.win){ highlightWin(res.line); updateStatus((player===1?'X':'O')+ ' thắng!'); endGame(); return true; }
-  if(isBoardFull()){ updateStatus('Hòa!'); endGame(); return true; }
-  state.turn = -state.turn; updateTurn();
-  if(state.mode==='ai' && (state.turn===-1 || (state.turn===1 && false))){ // AI plays as O (turn -1)
-    if(fromUser) setTimeout(()=>aiMove(), 220);
-  }
-  if(state.mode==='online' && fromUser){ // send move
-    sendData({type:'move',x,y,player});
-  }
-  return true;
-}
-
-function getCellDiv(x,y){ return elems.boardWrap.querySelector(`.cell[data-x='${x}'][data-y='${y}']`); }
-
-function appendMove(x,y,player){ const el = document.createElement('div'); el.textContent = `${player===1?'X':'O'} -> (${x},${y})`; elems.moves.prepend(el); }
-
-function updateTurn(){ elems.turnLabel.textContent = state.turn===1? 'X (Bạn)':'O (Đối thủ)'; }
-function updateStatus(t){ elems.status.textContent = t; }
-function isBoardFull(){ return state.board.every(r=>r.every(c=>c!==0)); }
-
-function endGame(){ // disable further clicks by removing listeners
-  elems.boardWrap.querySelectorAll('.cell').forEach(c=>{ c.style.cursor='default' });
-}
-
-function undo(){ const last = state.history.pop(); if(!last) return; state.board[last.y][last.x]=0; const div=getCellDiv(last.x,last.y); updateCell(div,last.x,last.y); updateStatus('Undo: '+(last.player===1?'X':'O')); state.turn = last.player; }
-
-// ---- WIN CHECK ----
-function checkWin(px,py,player){
-  const dirs = [[1,0],[0,1],[1,1],[1,-1]];
-  for(const [dx,dy] of dirs){
-    let cnt=1; const line=[[px,py]];
-    for(let s=1;s<state.winLen;s++){ const x=px+dx*s,y=py+dy*s; if(inBounds(x,y)&&state.board[y][x]===player){cnt++; line.push([x,y])} else break }
-    for(let s=1;s<state.winLen;s++){ const x=px-dx*s,y=py-dy*s; if(inBounds(x,y)&&state.board[y][x]===player){cnt++; line.push([x,y])} else break }
-    if(cnt>=state.winLen) return {win:true,line};
-  }
-  return {win:false};
-}
-function inBounds(x,y){ return x>=0 && y>=0 && x<state.size && y<state.size }
-function highlightWin(line){ line.forEach(([x,y])=>{ const d=getCellDiv(x,y); if(d) d.classList.add('win'); }); }
-function highlightHint(x,y){ const d=getCellDiv(x,y); if(!d) return; const orig=d.className; d.classList.add('win'); setTimeout(()=>d.className=orig,900); }
-
-// ---- AI (heuristic + minimax limited) ----
-// Simple scoring patterns: we score lines of up to winLen for both sides
-function evaluateBoard(b){
-  // returns score from perspective of 'X' (player 1). We'll use patterns for both
-  const scoreFor = (player)=>{
-    let score = 0;
-    const W = state.winLen;
-    for(let y=0;y<state.size;y++)for(let x=0;x<state.size;x++){
-      if(b[y][x]!==player) continue;
-      // for each direction count contiguous and openness
-      const dirs = [[1,0],[0,1],[1,1],[1,-1]];
-      for(const [dx,dy] of dirs){
-        let cnt=1; let leftOpen=0,rightOpen=0;
-        // forward
-        let sx=x+dx, sy=y+dy;
-        while(inBounds(sx,sy) && b[sy][sx]===player){ cnt++; sx+=dx; sy+=dy }
-        if(inBounds(sx,sy) && b[sy][sx]===0) rightOpen=1;
-        sx=x-dx; sy=y-dy;
-        while(inBounds(sx,sy) && b[sy][sx]===player){ cnt++; sx-=dx; sy-=dy }
-        if(inBounds(sx,sy) && b[sy][sx]===0) leftOpen=1;
-        const open = leftOpen + rightOpen;
-        // scoring heuristic
-        if(cnt>=W) return Number.MAX_SAFE_INTEGER/4; // immediate win
-        if(cnt===W-1 && open>0) score += 100000;
-        else if(cnt===W-2 && open>0) score += 5000;
-        else score += cnt*cnt*(open+1);
-      }
-    }
-    return score;
-  }
-  const s1 = scoreFor(1); const s2 = scoreFor(-1);
-  return s1 - s2;
-}
-
-function cloneBoard(b){ return b.map(r=>r.slice()); }
-
-function findBestMove(player){
-  // quick fallback: if near win, block or win
-  const level = state.aiLevel;
-  const depth = level===1?1: (level===2?3:4);
-  let best = null; let bestScore = -Infinity;
-  const moves = generateCandidateMoves();
-  for(const mv of moves){
-    const b = cloneBoard(state.board);
-    b[mv.y][mv.x] = player;
-    const score = -negamax(b, depth-1, -Infinity, Infinity, -player);
-    if(score>bestScore){ bestScore=score; best=mv }
-  }
-  return best;
-}
-
-function generateCandidateMoves(){
-  const set=[]; const seen=new Set();
-  for(let y=0;y<state.size;y++)for(let x=0;x<state.size;x++){
-    if(state.board[y][x]!==0) continue;
-    // keep moves near existing stones
-    for(let yy=Math.max(0,y-2);yy<=Math.min(state.size-1,y+2);yy++)for(let xx=Math.max(0,x-2);xx<=Math.min(state.size-1,x+2);xx++){
-      if(state.board[yy][xx]!==0){ const key = x+','+y; if(!seen.has(key)){ seen.add(key); set.push({x,y}); } }
-    }
-  }
-  if(set.length===0){ // empty board
-    return [{x:Math.floor(state.size/2), y:Math.floor(state.size/2)}];
-  }
-  return set;
-}
-
-function negamax(board, depth, alpha, beta, player){
-  // player is 1 or -1 representing whose turn
-  // terminal or depth 0 evaluate
-  // check immediate win
-  for(let y=0;y<state.size;y++)for(let x=0;x<state.size;x++){
-    if(board[y][x]===player){ const res = checkWinOnBoard(board,x,y,player); if(res) return Number.MAX_SAFE_INTEGER/4; }
-  }
-  if(depth<=0) return evaluateBoard(board)*player;
-  const moves = generateCandidateMovesOnBoard(board);
-  if(moves.length===0) return 0;
-  let value = -Infinity;
-  for(const mv of moves){
-    board[mv.y][mv.x]=player;
-    const score = -negamax(board, depth-1, -beta, -alpha, -player);
-    board[mv.y][mv.x]=0;
-    if(score>value) value=score;
-    if(score>alpha) alpha=score;
-    if(alpha>=beta) break;
-  }
-  return value;
-}
-
-function checkWinOnBoard(b,px,py,player){
-  const dirs = [[1,0],[0,1],[1,1],[1,-1]];
-  for(const [dx,dy] of dirs){
-    let cnt=1;
-    for(let s=1;s<state.winLen;s++){ const x=px+dx*s,y=py+dy*s; if(inBounds(x,y)&&b[y][x]===player) cnt++; else break }
-    for(let s=1;s<state.winLen;s++){ const x=px-dx*s,y=py-dy*s; if(inBounds(x,y)&&b[y][x]===player) cnt++; else break }
-    if(cnt>=state.winLen) return true;
-  }
+  if(!board.includes('')){active=false;info('🤝 Hòa rồi!');return true;}
   return false;
 }
-
-function generateCandidateMovesOnBoard(b){
-  const set=[]; const seen=new Set();
-  for(let y=0;y<state.size;y++)for(let x=0;x<state.size;x++){
-    if(b[y][x]!==0) continue;
-    for(let yy=Math.max(0,y-2);yy<=Math.min(state.size-1,y+2);yy++)for(let xx=Math.max(0,x-2);xx<=Math.min(state.size-1,x+2);xx++){
-      if(b[yy][xx]!==0){ const key = x+','+y; if(!seen.has(key)){ seen.add(key); set.push({x,y}); } }
-    }
-  }
-  if(set.length===0) return [{x:Math.floor(state.size/2), y:Math.floor(state.size/2)}];
-  return set;
+function updateScore(){
+  $('sx').textContent=scores.X;
+  $('so').textContent=scores.O;
+  $('soText').innerHTML=(aiOnline?'👤 O:':'🤖 O:')+' <b id="so">'+scores.O+'</b>';
 }
 
+/* ====== AI MINIMAX ====== */
 function aiMove(){
-  const player = state.turn; const best = findBestMove(player);
-  if(!best){ // fallback random
-    const empties=[]; for(let y=0;y<state.size;y++)for(let x=0;x<state.size;x++) if(state.board[y][x]===0) empties.push({x,y});
-    const mv = empties[Math.floor(Math.random()*empties.length)]; if(mv) makeMove(mv.x,mv.y,player,true);
-  } else makeMove(best.x,best.y,player,true);
-}
-
-// ---- ONLINE (WebRTC with copy/paste signaling) ----
-async function createOffer(){
-  if(!('RTCPeerConnection' in window)){ updateStatus('Trình duyệt không hỗ trợ WebRTC'); return; }
-  const pc = new RTCPeerConnection({iceServers:[{urls:['stun:stun.l.google.com:19302']} ]});
-  state.peer = pc; state.dataChannel = pc.createDataChannel('caro');
-  state.dataChannel.onopen = ()=>{ updateStatus('Kênh dữ liệu mở — sẵn sàng chơi'); state.dataChannel.onmessage = onDataMessage; };
-  state.dataChannel.onclose = ()=>updateStatus('Kênh đóng');
-  pc.onicecandidate = e=>{
-    if(e.candidate) return; // we'll send whole SDP once localDesc set
-    elems.localSignal.value = JSON.stringify(pc.localDescription);
+  let best=-Infinity,move=0;
+  for(let i=0;i<9;i++){
+    if(board[i]===''){board[i]='O';let score=minimax(0,false);board[i]='';if(score>best){best=score;move=i;}}
   }
-  const offer = await pc.createOffer(); await pc.setLocalDescription(offer);
-  updateStatus('Offer tạo — copy từ trường "Local signal" gửi cho đối thủ'); state.onlineRole='caller';
+  move(move);
+}
+function minimax(depth,isMax){
+  const w=checkWinner();
+  if(w==='O')return 10-depth;
+  if(w==='X')return depth-10;
+  if(w==='tie')return 0;
+  if(isMax){
+    let maxE=-Infinity;
+    for(let i=0;i<9;i++){if(board[i]===''){board[i]='O';maxE=Math.max(maxE,minimax(depth+1,false));board[i]='';}}
+    return maxE;
+  }else{
+    let minE=Infinity;
+    for(let i=0;i<9;i++){if(board[i]===''){board[i]='X';minE=Math.min(minE,minimax(depth+1,true));board[i]='';}}
+    return minE;
+  }
+}
+function checkWinner(){
+  for(let w of win){const[a,b,c]=w;if(board[a]&&board[a]===board[b]&&board[a]===board[c])return board[a];}
+  return board.includes('')?null:'tie';
 }
 
-async function acceptSignal(){
-  try{
-    const txt = elems.remoteSignal.value.trim(); if(!txt) return updateStatus('Dán signal của đối thủ vào ô Remote signal');
-    const data = JSON.parse(txt);
-    if(data.type && data.type==='offer'){ // if remote is offer we are answerer
-      const pc = new RTCPeerConnection({iceServers:[{urls:['stun:stun.l.google.com:19302']} ]});
-      state.peer = pc;
-      pc.ondatachannel = e=>{ state.dataChannel = e.channel; state.dataChannel.onmessage = onDataMessage; state.dataChannel.onopen = ()=>updateStatus('Kết nối mở — sẵn sàng chơi'); };
-      pc.onicecandidate = ev=>{ if(ev.candidate) return; elems.localSignal.value = JSON.stringify(pc.localDescription); }
-      await pc.setRemoteDescription(data);
-      const answer = await pc.createAnswer(); await pc.setLocalDescription(answer);
-      updateStatus('Answer tạo — gửi nội dung trong Local signal cho caller'); state.onlineRole='callee';
-    } else if(data.type && data.type==='answer'){ // accept answer if we're caller
-      if(!state.peer) return updateStatus('Bạn chưa tạo offer');
-      await state.peer.setRemoteDescription(data);
-      updateStatus('Kết nối hoàn tất — chờ DataChannel mở');
-    } else {
-      updateStatus('Signal không hợp lệ');
-    }
-  } catch(err){ console.error(err); updateStatus('Lỗi khi xử lý signal: '+err.message); }
+/* ====== RESET ====== */
+function resetBoard(){
+  initGame(aiOnline?'🌍 Online':'🤖 AI'+(conn?' Online':'')+' - Ván mới');
 }
 
-function onDataMessage(ev){
-  try{
-    const d = JSON.parse(ev.data);
-    if(d.type==='move'){
-      if(state.board[d.y][d.x]===0){ state.board[d.y][d.x]=d.player; updateCell(getCellDiv(d.x,d.y),d.x,d.y); appendMove(d.x,d.y,d.player); const res = checkWin(d.x,d.y,d.player); if(res.win){ highlightWin(res.line); updateStatus((d.player===1?'X':'O')+' thắng (từ đối thủ)'); endGame(); } else { state.turn = -state.turn; updateTurn(); } }
-    } else if(d.type==='chat'){
-      updateStatus('Msg: '+d.msg);
-    }
-  } catch(e){ console.error('invalid data',e) }
+/* ====== P2P ONLINE ====== */
+function initPeer(room,isHost){
+  import('https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js').then(()=>{
+    peer=new Peer();
+    peer.on('open',id=>{
+      if(isHost){
+        conn=null;info('🔗 Chờ đối thủ...');
+        peer.on('connection',c=>{
+          conn=c;setupConn();
+        });
+        $('share').textContent=`🔗 Mã phòng: ${room} (gửi cho bạn bè)`;
+      }else{
+        conn=peer.connect(room);
+        setupConn();
+      }
+    });
+    peer.on('error',e=>alert('Lỗi kết nối: '+e.type));
+  });
 }
-
-function sendData(obj){ if(state.dataChannel && state.dataChannel.readyState==='open'){ state.dataChannel.send(JSON.stringify(obj)); } }
-
-function closeConnection(){ if(state.dataChannel) state.dataChannel.close(); if(state.peer) state.peer.close(); state.dataChannel=null; state.peer=null; updateStatus('Kết nối đóng'); elems.localSignal.value=''; elems.remoteSignal.value=''; }
-
-// ---- UTILITIES ----
-function exportGame(){ const payload = {size:state.size,winLen:state.winLen,history:state.history}; const blob = new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}); const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='caro-game.json'; a.click(); URL.revokeObjectURL(url); }
-
-// start
-initUI(); setup();
-
-// optional: attempt to auto-play AI for ai mode
-setInterval(()=>{
-  if(state.mode==='ai' && state.turn===-1){ if(!state.history.length) return; aiMove(); }
-},500);
+function setupConn(){
+  conn.on('open',()=>{
+    aiOnline=true;initGame('🌍 Đã kết nối - Bạn đi trước (X)');
+  });
+  conn.on('data',d=>{
+    if(d.type==='move')move(d.i);
+  });
+  conn.on('close',()=>{alert('Đối thủ thoát');backMenu();});
+}
 </script>
 </body>
 </html>
