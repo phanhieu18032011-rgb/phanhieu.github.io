@@ -1,35 +1,47 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const androidBtn = document.getElementById('androidBtn');
-    const iosBtn = document.getElementById('iosBtn');
-    const androidContent = document.getElementById('androidContent');
-    const iosContent = document.getElementById('iosContent');
-
-    // Platform toggle functionality
-    androidBtn.addEventListener('click', function() {
-        androidBtn.classList.add('active');
-        iosBtn.classList.remove('active');
-        androidContent.style.display = 'block';
-        iosContent.style.display = 'none';
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    // Check for saved theme preference or use preferred color scheme
+    const savedTheme = localStorage.getItem('theme') || 
+                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    // Apply the saved theme
+    if (savedTheme === 'dark') {
+        html.classList.add('dark');
+        themeToggle.innerHTML = '<i data-feather="sun"></i>';
+    } else {
+        html.classList.remove('dark');
+        themeToggle.innerHTML = '<i data-feather="moon"></i>';
+    }
+    
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', function() {
+        html.classList.toggle('dark');
+        
+        if (html.classList.contains('dark')) {
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerHTML = '<i data-feather="sun"></i>';
+        } else {
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerHTML = '<i data-feather="moon"></i>';
+        }
+        
+        feather.replace();
     });
-
-    iosBtn.addEventListener('click', function() {
-        iosBtn.classList.add('active');
-        androidBtn.classList.remove('active');
-        iosContent.style.display = 'block';
-        androidContent.style.display = 'none';
-    });
-
+    
+    // Replace all feather icons
+    feather.replace();
+    
     // Add animation to buttons on hover
-    const downloadButtons = document.querySelectorAll('.download-btn');
-    downloadButtons.forEach(button => {
-        button.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-3px)';
-            this.style.boxShadow = '0 5px 15px rgba(0, 242, 254, 0.4)';
+    const buttons = document.querySelectorAll('a');
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+            button.classList.add('transform', 'scale-105');
         });
-
-        button.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = 'none';
+        button.addEventListener('mouseleave', () => {
+            button.classList.remove('transform', 'scale-105');
         });
     });
 });
