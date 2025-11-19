@@ -3,100 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRGteam Mode | HieuDRG</title>
+    <title>DRGTeam Mode Portal</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>DRGteam Mode <span>by HieuDRG</span></h1>
-            <div class="platform-toggle">
-                <button class="active" id="androidBtn">ANDROID</button>
-                <button id="iosBtn">IOS</button>
-            </div>
-        </header>
-
-        <main>
-            <!-- Android Content (Default) -->
-            <div class="content-section" id="androidContent">
-                <div class="app-card">
-                    <div class="app-header">
-                        <span class="app-icon">🥷</span>
-                        <h2>Delta X</h2>
-                    </div>
-                    <div class="app-version">
-                        <h3>Delta X (quốc tế) V2.697</h3>
-                        <a href="https://anotepad.com/notes/tpkt96nb" class="download-btn" target="_blank">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                    <div class="app-version">
-                        <h3>Delta X (VNG chính thức không cần file login) V2.697</h3>
-                        <a href="https://anotepad.com/notes/8psbt7ym" class="download-btn" target="_blank">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-
-                <div class="app-card">
-                    <div class="app-header">
-                        <span class="app-icon">🅺</span>
-                        <h2>Krnl</h2>
-                    </div>
-                    <div class="app-version">
-                        <h3>Krnl (quốc tế) V2.697</h3>
-                        <a href="https://anotepad.com/notes/ra5esdy4" class="download-btn" target="_blank">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                    <div class="app-version">
-                        <h3>Krnl (VNG chính thức) V2.697</h3>
-                        <a href="https://anotepad.com/notes/6wars435" class="download-btn" target="_blank">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
+<body class="bg-gray-100 dark:bg-dark min-h-screen">
+    <header class="bg-white dark:bg-gray-800 shadow-md">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-primary dark:text-white">DRGTeam Mode Portal</h1>
+                <div class="flex items-center space-x-4">
+                    <button id="themeToggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                        <i data-feather="moon" class="text-gray-700 dark:text-gray-300"></i>
+                    </button>
                 </div>
             </div>
+        </div>
+    </header>
 
-            <!-- iOS Content (Hidden by default) -->
-            <div class="content-section" id="iosContent" style="display: none;">
-                <div class="app-card">
-                    <div class="app-header">
-                        <span class="app-icon">🅺</span>
-                        <h2>Krnl</h2>
-                    </div>
-                    <div class="app-version">
-                        <h3>Krnl (VNG chính thức) V23</h3>
-                        <p class="note">HuyMyThic IOS</p>
-                        <a href="https://link4m.com/hw9AZ" class="download-btn" target="_blank">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Android Section -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                <div class="bg-primary dark:bg-primary-dark p-4">
+                    <h2 class="text-xl font-bold text-white flex items-center">
+                        <i data-feather="smartphone" class="mr-2"></i> ANDROID
+                    </h2>
                 </div>
-
-                <div class="app-card">
-                    <div class="app-header">
-                        <span class="app-icon">🥷</span>
-                        <h2>Delta X</h2>
+                <div class="p-6">
+                    <!-- Delta X -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
+                            <span class="bg-gray-800 dark:bg-gray-700 text-white px-2 py-1 rounded mr-2">🥷</span>
+                            Delta X
+                        </h3>
+                        <div class="mt-4 space-y-4">
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <h4 class="font-medium text-gray-700 dark:text-gray-300">Delta X (quốc tế) V2.697</h4>
+                                <a href="https://anotepad.com/notes/tpkt96nb" target="_blank" class="mt-2 inline-block px-4 py-2 bg-primary hover:bg-primary-600 text-white rounded-lg transition duration-200">
+                                    <i data-feather="external-link" class="inline mr-1"></i> Access
+                                </a>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <h4 class="font-medium text-gray-700 dark:text-gray-300">Delta X (VNG chính thức không cần file login) V2.697</h4>
+                                <a href="https://anotepad.com/notes/8psbt7ym" target="_blank" class="mt-2 inline-block px-4 py-2 bg-primary hover:bg-primary-600 text-white rounded-lg transition duration-200">
+                                    <i data-feather="external-link" class="inline mr-1"></i> Access
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="app-version">
-                        <h3>Delta X (VNG chính thức không cần file login) V41</h3>
-                        <p class="note">HuyMyThic IOS</p>
-                        <a href="https://link4m.com/FKCyO8jE" class="download-btn" target="_blank">
-                            <i class="fas fa-download"></i> Download
-                        </a>
+
+                    <!-- Krnl -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
+                            <span class="bg-gray-800 dark:bg-gray-700 text-white px-2 py-1 rounded mr-2">🅺</span>
+                            Krnl
+                        </h3>
+                        <div class="mt-4 space-y-4">
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <h4 class="font-medium text-gray-700 dark:text-gray-300">Krnl (quốc tế) V2.697</h4>
+                                <a href="https://anotepad.com/notes/ra5esdy4" target="_blank" class="mt-2 inline-block px-4 py-2 bg-primary hover:bg-primary-600 text-white rounded-lg transition duration-200">
+                                    <i data-feather="external-link" class="inline mr-1"></i> Access
+                                </a>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <h4 class="font-medium text-gray-700 dark:text-gray-300">Krnl (VNG chính thức) V2.697</h4>
+                                <a href="https://anotepad.com/notes/6wars435" target="_blank" class="mt-2 inline-block px-4 py-2 bg-primary hover:bg-primary-600 text-white rounded-lg transition duration-200">
+                                    <i data-feather="external-link" class="inline mr-1"></i> Access
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </main>
 
-        <footer>
-            <p>© 2023 DRGteam Mode | Bản quyền thuộc HieuDRG</p>
-        </footer>
-    </div>
+            <!-- iOS Section -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                <div class="bg-secondary dark:bg-secondary-dark p-4">
+                    <h2 class="text-xl font-bold text-white flex items-center">
+                        <i data-feather="tablet" class="mr-2"></i> iOS
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <!-- Krnl -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
+                            <span class="bg-gray-800 dark:bg-gray-700 text-white px-2 py-1 rounded mr-2">🅺</span>
+                            Krnl
+                        </h3>
+                        <div class="mt-4">
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <h4 class="font-medium text-gray-700 dark:text-gray-300">Krnl (VNG chính thức) V23</h4>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">HuyMyThic iOS</p>
+                                <a href="https://link4m.com/hw9AZ" target="_blank" class="mt-2 inline-block px-4 py-2 bg-secondary hover:bg-secondary-600 text-white rounded-lg transition duration-200">
+                                    <i data-feather="external-link" class="inline mr-1"></i> Access
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delta X -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
+                            <span class="bg-gray-800 dark:bg-gray-700 text-white px-2 py-1 rounded mr-2">🥷</span>
+                            Delta X
+                        </h3>
+                        <div class="mt-4">
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <h4 class="font-medium text-gray-700 dark:text-gray-300">Delta X (VNG chính thức không cần file login) V41</h4>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">HuyMyThic iOS</p>
+                                <a href="https://link4m.com/FKCyO8jE" target="_blank" class="mt-2 inline-block px-4 py-2 bg-secondary hover:bg-secondary-600 text-white rounded-lg transition duration-200">
+                                    <i data-feather="external-link" class="inline mr-1"></i> Access
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2023 DRGTeam Mode Portal. All rights reserved.</p>
+            <p class="mt-1">Bản quyền thuộc HieuDRG</p>
+        </div>
+    </main>
 
     <script src="script.js"></script>
-<script src="https://hieudrgsharemore.wuaze.com"></script>
+    <script>
+        feather.replace();
+    </script>
+<script src=""></script>
 </body>
 </html>
