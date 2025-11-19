@@ -1,415 +1,91 @@
-<!doctype html>
-<html lang="vi">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Python DRGcode — DRGteamcode </title>
-
-  <!-- Google font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg:#0f1724;
-      --panel:#0b1220;
-      --accent:#60a5fa;
-      --muted:#94a3b8;
-      --success:#34d399;
-      --danger:#fb7185;
-      --glass: rgba(255,255,255,0.03);
-      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071029 0%, #041028 60%);color:#e6eef8;}
-    .wrap{max-width:1200px;margin:28px auto;padding:20px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,23,0.7);}
-    header{display:flex;align-items:center;gap:16px;margin-bottom:18px;}
-    .logo{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;color:#04203a;font-size:20px;box-shadow:0 6px 18px rgba(96,165,250,0.12)}
-    h1{margin:0;font-size:20px}
-    p.lead{margin:0;color:var(--muted);font-size:13px}
-
-    .grid{display:grid;grid-template-columns:1fr 380px;gap:16px;}
-    .card{background:var(--panel);border-radius:12px;padding:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
-    .editor-toolbar{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
-    .btn{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);color:var(--muted);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600;font-size:13px}
-    .btn:hover{color:#fff}
-    .btn.primary{background:linear-gradient(90deg,var(--accent),#7c3aed);color:#021028;border:none;box-shadow:0 8px 24px rgba(92,154,255,0.12)}
-    .btn.ghost{background:transparent;border:1px dashed rgba(255,255,255,0.03)}
-    .btn.danger{background:linear-gradient(90deg,var(--danger),#f97316);color:#fff}
-    .small{font-size:12px;padding:6px 8px;border-radius:8px}
-    .row{display:flex;gap:8px;align-items:center}
-
-    #editor{height:560px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.02)}
-    .sidebar .section{margin-bottom:12px}
-    .panel-title{font-size:13px;color:#dce8ff;margin-bottom:8px;font-weight:600}
-    .output{height:260px;overflow:auto;padding:12px;border-radius:8px;background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.4));font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;font-size:13px;color:#dbeafe;border:1px solid rgba(255,255,255,0.02)}
-    .status{font-size:12px;color:var(--muted);margin-left:6px}
-    .controls{display:flex;gap:8px;flex-wrap:wrap}
-    .select{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted);font-weight:600}
-    .footer{margin-top:12px;font-size:12px;color:var(--muted)}
-    a.link{color:var(--accent);text-decoration:none;font-weight:600}
-    .kbd{background:#061227;padding:4px 8px;border-radius:6px;border:1px solid rgba(255,255,255,0.03);font-weight:700;font-size:12px}
-    @media(max-width:980px){ .grid{grid-template-columns:1fr; } #editor{height:420px} .sidebar{order:2}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRGTeam Mode</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="logo">Py</div>
-      <div>
-        <h1>Python DRGcode — DRGteamcode</h1>
-        <p class="lead">Môi trường lập trình Python cho người mới - Do team DRG phát triển</p>
-      </div>
-    </header>
+    <div class="container">
+        <header>
+            <h1>DRGTeam Mode <span class="badge">🥷</span></h1>
+            <p class="subtitle">Professional Tools for Android & iOS</p>
+        </header>
 
-    <div class="grid">
-      <div>
-        <div class="card">
-          <div class="editor-toolbar">
-            <div class="row">
-              <button class="btn primary" id="runBtn">▶ Run code (Ctrl+Enter)</button>
-              <button class="btn" id="stopBtn">■ Stop code</button>
-              <button class="btn ghost" id="clearOutBtn">Clear Output</button>
-              <span class="status" id="status">Pyodide: chưa tải</span>
+        <div class="platform-section">
+            <div class="platform-header android">
+                <i class="fab fa-android"></i>
+                <h2>ANDROID</h2>
             </div>
-            <div style="margin-left:auto" class="row">
-              <select id="examples" class="select small">
-                <option value="">— Examples —</option>
-                <option value="print('Hello from Python!')">Hello</option>
-                <option value="for i in range(5):\n    print(i, 'x', i, '=', i*i)">Loop</option>
-                <option value="# Tính căn bậc hai\nimport math\nprint(math.sqrt(2))">Math</option>
-                <option value="# Thử sử dụng requests (không có network trong pyodide by default)\nprint('Network disabled on GitHub Pages')">Disabled network</option>
-              </select>
-              <button class="btn" id="saveBtn">💾 Lưu</button>
-              <button class="btn" id="downloadBtn">⬇ Tải .py</button>
-            </div>
-          </div>
 
-          <div id="editor"></div>
+            <div class="tool-card">
+                <div class="tool-header">
+                    <span class="tool-icon">🥷</span>
+                    <h3>Delta X</h3>
+                </div>
+                <div class="tool-version">
+                    <p>Delta X (quốc tế) V2.697</p>
+                    <a href="https://anotepad.com/notes/tpkt96nb" class="btn">Download</a>
+                </div>
+                <div class="tool-version">
+                    <p>Delta X (VNG chính thức không cần file login) V2.697</p>
+                    <a href="https://anotepad.com/notes/8psbt7ym" class="btn">Download</a>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-header">
+                    <span class="tool-icon">🅺</span>
+                    <h3>Krnl</h3>
+                </div>
+                <div class="tool-version">
+                    <p>Krnl (quốc tế) V2.697</p>
+                    <a href="https://anotepad.com/notes/ra5esdy4" class="btn">Download</a>
+                </div>
+                <div class="tool-version">
+                    <p>Krnl (VNG chính thức) V2.697</p>
+                    <a href="https://anotepad.com/notes/6wars435" class="btn">Download</a>
+                </div>
+            </div>
         </div>
 
-        <div style="margin-top:12px" class="card">
-          <div class="panel-title">Output</div>
-          <div id="output" class="output" aria-live="polite"></div>
-          <div class="footer">Lưu ý: execution xảy ra hoàn toàn trong trình duyệt. Một số module (ví dụ: network) có thể bị giới hạn.</div>
+        <div class="platform-section">
+            <div class="platform-header ios">
+                <i class="fab fa-apple"></i>
+                <h2>iOS</h2>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-header">
+                    <span class="tool-icon">🅺</span>
+                    <h3>Krnl</h3>
+                </div>
+                <div class="tool-version">
+                    <p>Krnl (VNG chính thức) V23</p>
+                    <p class="note">HuyMyThic IOS</p>
+                    <a href="https://link4m.com/hw9AZ" class="btn">Download</a>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-header">
+                    <span class="tool-icon">🥷</span>
+                    <h3>Delta X</h3>
+                </div>
+                <div class="tool-version">
+                    <p>Delta X (VNG chính thức không cần file login) V41</p>
+                    <p class="note">HuyMyThic IOS</p>
+                    <a href="https://link4m.com/FKCyO8jE" class="btn">Download</a>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <aside class="sidebar">
-        <div class="card">
-          <div class="panel-title">Environment</div>
-          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-            <div><strong>Pyodide:</strong> <span id="pyodideVersion">—</span></div>
-            <div><strong>Python:</strong> <span id="pyVersion">—</span></div>
-          </div>
-
-          <hr style="margin:12px 0;border:none;border-top:1px solid rgba(255,255,255,0.02)" />
-
-          <div class="section">
-            <div class="panel-title">Quick actions</div>
-            <div class="controls">
-              <button class="btn" id="loadLibBtn">Tải thêm libs (numpy,pandas)</button>
-              <button class="btn" id="clearEditorBtn">Xóa editor</button>
-              <button class="btn" id="restoreBtn">Phục hồi (local)</button>
-            </div>
-          </div>
-
-          <div class="section">
-            <div class="panel-title">Shortcuts</div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <div class="kbd">Ctrl + Enter</div><div class="status">Chạy</div>
-              <div class="kbd">Ctrl + S</div><div class="status">Lưu</div>
-            </div>
-          </div>
-
-          <div style="margin-top:12px" class="section">
-            <div class="panel-title">Deploy</div>
-            <div style="font-size:13px;color:var(--muted)">
-              1) Tạo repo: <code>username.github.io</code><br>
-              2) Đẩy file <code>index.html</code> lên branch <code>main</code>.<br>
-              3) GitHub Pages sẽ publish tự động: <a class="link" href="#" target="_blank" id="ghlink">username.github.io</a>
-            </div>
-          </div>
-        </div>
-      </aside>
+        <footer>
+            <p>© 2023 DRGTeam Mode. All rights reserved.</p>
+        </footer>
     </div>
-  </div>
-
-  <!-- ACE editor from CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ace.js" integrity="" crossorigin="anonymous"></script>
-
-  <!-- Pyodide (load async). Using official CDN; when updating, replace with latest stable version -->
-  <script>
-    (function(){
-      // create script element for pyodide
-      const pyScript = document.createElement('script');
-      pyScript.src = "https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js";
-      pyScript.defer = true;
-      document.head.appendChild(pyScript);
-    })();
-  </script>
-
-  <script>
-    // UI elements
-    const runBtn = document.getElementById('runBtn');
-    const stopBtn = document.getElementById('stopBtn');
-    const clearOutBtn = document.getElementById('clearOutBtn');
-    const saveBtn = document.getElementById('saveBtn');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const loadLibBtn = document.getElementById('loadLibBtn');
-    const statusEl = document.getElementById('status');
-    const pyodideVersionEl = document.getElementById('pyodideVersion');
-    const pyVersionEl = document.getElementById('pyVersion');
-    const outputEl = document.getElementById('output');
-    const examples = document.getElementById('examples');
-    const clearEditorBtn = document.getElementById('clearEditorBtn');
-    const restoreBtn = document.getElementById('restoreBtn');
-    const ghlink = document.getElementById('ghlink');
-
-    // Editor init
-    const editor = ace.edit("editor", {
-      mode: "ace/mode/python",
-      selectionStyle: "text",
-      theme: "ace/theme/tomorrow_night",
-      fontSize: 14,
-      showPrintMargin: false
-    });
-    editor.setValue(`# Viết mã Python vào đây và nhấn Run (Ctrl+Enter)\nprint('Hello, world!')\n`, -1);
-
-    // localStorage key
-    const LS_KEY = 'py_playground_code_v1';
-
-    // restore if available
-    function restoreFromLocal(){
-      const v = localStorage.getItem(LS_KEY);
-      if(v) editor.setValue(v, -1);
-    }
-    restoreFromLocal();
-
-    // save
-    function saveToLocal(){
-      const code = editor.getValue();
-      localStorage.setItem(LS_KEY, code);
-      flashStatus('Saved ✓', 1200);
-    }
-
-    // download .py
-    function downloadCode(){
-      const blob = new Blob([editor.getValue()], {type: 'text/x-python'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'script.py';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    }
-
-    // examples select
-    examples.addEventListener('change', () => {
-      if(!examples.value) return;
-      editor.setValue(examples.value, -1);
-      examples.value = '';
-    });
-
-    clearEditorBtn.addEventListener('click', () => {
-      editor.setValue('', -1);
-    });
-
-    restoreBtn.addEventListener('click', restoreFromLocal);
-
-    saveBtn.addEventListener('click', saveToLocal);
-    downloadBtn.addEventListener('click', downloadCode);
-    clearOutBtn.addEventListener('click', ()=> outputEl.textContent = '');
-    ghlink.href = `https://${location.hostname}/`;
-
-    // keyboard shortcuts
-    editor.commands.addCommand({
-      name: 'run',
-      bindKey: {win: 'Ctrl-Enter', mac: 'Command-Enter'},
-      exec: () => runCode()
-    });
-    window.addEventListener('keydown', e => {
-      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's'){
-        e.preventDefault();
-        saveToLocal();
-      }
-    });
-
-    // Pyodide logic
-    let pyodide = null;
-    let running = false;
-    let runAbortController = null;
-
-    async function loadPyodideAndPackages(){
-      statusEl.textContent = 'Đang tải Pyodide...';
-      try{
-        // wait for global load
-        // pyodide loads a global function loadPyodide
-        while(typeof loadPyodide === 'undefined'){
-          await new Promise(r => setTimeout(r, 100));
-        }
-        pyodide = await loadPyodide({indexURL: "https://cdn.jsdelivr.net/pyodide/v0.23.4/full/"});
-        pyodideVersionEl.textContent = (pyodide.runPython("import sys; sys.modules.get('pyodide').__version__") || '—');
-        pyVersionEl.textContent = pyodide.runPython("import sys; sys.version.split('\\n')[0]");
-        statusEl.textContent = 'Pyodide đã sẵn sàng';
-      }catch(err){
-        console.error(err);
-        statusEl.textContent = 'Lỗi tải Pyodide';
-        appendOutput('Error loading Pyodide: ' + err);
-      }
-    }
-
-    function appendOutput(text, kind='log'){
-      const pre = document.createElement('pre');
-      pre.style.margin = '0 0 8px 0';
-      if(kind==='err') pre.style.color = 'var(--danger)';
-      pre.textContent = text;
-      outputEl.appendChild(pre);
-      outputEl.scrollTop = outputEl.scrollHeight;
-    }
-
-    // Redirect Python stdout/stderr to our output
-    function setupStdIO(){
-      if(!pyodide) return;
-      pyodide.runPython(`
-import sys
-from js import console
-
-class _Out:
-    def write(self, s):
-        if s:
-            try:
-                from js import __sendToOutput
-                __sendToOutput(s, 'log')
-            except:
-                console.log(s)
-    def flush(self): pass
-
-class _Err:
-    def write(self, s):
-        if s:
-            try:
-                from js import __sendToOutput
-                __sendToOutput(s, 'err')
-            except:
-                console.error(s)
-    def flush(self): pass
-
-sys.stdout = _Out()
-sys.stderr = _Err()
-`);
-    }
-
-    // Expose JS function to pyodide environment
-    window.__sendToOutput = function(s, kind){
-      appendOutput(String(s), kind);
-    }
-
-    async function runCode(){
-      if(!pyodide){
-        appendOutput('Pyodide chưa tải — đang tải bây giờ...', 'err');
-        await loadPyodideAndPackages();
-        if(!pyodide) return;
-        setupStdIO();
-      }
-      if(running){
-        appendOutput('Đang chạy một phiên khác. Hãy nhấn Stop nếu muốn dừng.', 'err');
-        return;
-      }
-      running = true;
-      runBtn.disabled = true;
-      statusEl.textContent = 'Đang chạy...';
-      outputEl.textContent = '';
-
-      // small safety: run in async function; support cancellation via abort controller
-      runAbortController = {aborted:false};
-
-      const code = editor.getValue();
-      try{
-        // wrap to async so user can use await, asyncio, etc.
-        const wrapped = `
-import asyncio
-async def __user_main():
-${code.split('\n').map(l=>'    '+l).join('\n')}
-
-try:
-    task = __user_main()
-    if hasattr(task, '__await__'):
-        import asyncio
-        loop = asyncio.get_event_loop()
-        # if no running loop in pyodide, use asyncio.run
-        try:
-            await task
-        except RuntimeError:
-            asyncio.run(task)
-    else:
-        pass
-except Exception as e:
-    raise
-`;
-        // runPythonAsync available in pyodide
-        await pyodide.runPythonAsync(wrapped);
-        statusEl.textContent = 'Hoàn thành';
-      }catch(err){
-        // show error
-        appendOutput(String(err), 'err');
-        statusEl.textContent = 'Lỗi';
-      }finally{
-        running = false;
-        runBtn.disabled = false;
-        runAbortController = null;
-      }
-    }
-
-    // stop: current pyodide doesn't support kill; but we can reload the interpreter as a crude stop.
-    stopBtn.addEventListener('click', async ()=>{
-      if(!pyodide) return;
-      appendOutput('Dừng — reload Pyodide (thao tác nặng).', 'err');
-      try{
-        // reclaim by creating new pyodide instance
-        pyodide = null;
-        statusEl.textContent = 'Reloading Pyodide...';
-        await loadPyodideAndPackages();
-        setupStdIO();
-      }catch(e){
-        appendOutput('Lỗi khi reload: '+e, 'err');
-      }
-    });
-
-    runBtn.addEventListener('click', runCode);
-
-    // load extra libs
-    loadLibBtn.addEventListener('click', async ()=>{
-      if(!pyodide) await loadPyodideAndPackages();
-      statusEl.textContent = 'Đang tải numpy & pandas...';
-      try{
-        await pyodide.loadPackage(['numpy','pandas']);
-        appendOutput('numpy, pandas đã sẵn sàng');
-        statusEl.textContent = 'libs loaded';
-      }catch(e){
-        appendOutput('Không tải được libs: '+e, 'err');
-        statusEl.textContent = 'libs lỗi';
-      }
-    });
-
-    // initialize pyodide in background
-    (async ()=>{
-      // start loading silently
-      try{
-        await loadPyodideAndPackages();
-        setupStdIO();
-      }catch(e){
-        console.warn('Pyodide init error', e);
-      }
-    })();
-
-    // helper: show small flash message in status
-    let flashTimer = null;
-    function flashStatus(text, ms=900){
-      statusEl.textContent = text;
-      if(flashTimer) clearTimeout(flashTimer);
-      flashTimer = setTimeout(()=> statusEl.textContent = 'Pyodide đã sẵn sàng', ms);
-    }
-  </script>
+<script src=""></script>
 </body>
 </html>
