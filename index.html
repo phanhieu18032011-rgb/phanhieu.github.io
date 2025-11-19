@@ -3,89 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRGTeam Mode</title>
+    <title>DRGteam Mode | HieuDRG</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>DRGTeam Mode <span class="badge"></span></h1>
-            <p class="subtitle">Professional Tools for Android & iOS</p>
+            <h1>DRGteam Mode <span>by HieuDRG</span></h1>
+            <div class="platform-toggle">
+                <button class="active" id="androidBtn">ANDROID</button>
+                <button id="iosBtn">IOS</button>
+            </div>
         </header>
 
-        <div class="platform-section">
-            <div class="platform-header android">
-                <i class="fab fa-android"></i>
-                <h2>ANDROID</h2>
-            </div>
+        <main>
+            <!-- Android Content (Default) -->
+            <div class="content-section" id="androidContent">
+                <div class="app-card">
+                    <div class="app-header">
+                        <span class="app-icon">🥷</span>
+                        <h2>Delta X</h2>
+                    </div>
+                    <div class="app-version">
+                        <h3>Delta X (quốc tế) V2.697</h3>
+                        <a href="https://anotepad.com/notes/tpkt96nb" class="download-btn" target="_blank">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </div>
+                    <div class="app-version">
+                        <h3>Delta X (VNG chính thức không cần file login) V2.697</h3>
+                        <a href="https://anotepad.com/notes/8psbt7ym" class="download-btn" target="_blank">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </div>
+                </div>
 
-            <div class="tool-card">
-                <div class="tool-header">
-                    <span class="tool-icon">🥷</span>
-                    <h3>Delta X</h3>
-                </div>
-                <div class="tool-version">
-                    <p>Delta X (quốc tế) V2.697</p>
-                    <a href="https://anotepad.com/notes/tpkt96nb" class="btn">Download</a>
-                </div>
-                <div class="tool-version">
-                    <p>Delta X (VNG chính thức không cần file login) V2.697</p>
-                    <a href="https://anotepad.com/notes/8psbt7ym" class="btn">Download</a>
-                </div>
-            </div>
-
-            <div class="tool-card">
-                <div class="tool-header">
-                    <span class="tool-icon">🅺</span>
-                    <h3>Krnl</h3>
-                </div>
-                <div class="tool-version">
-                    <p>Krnl (quốc tế) V2.697</p>
-                    <a href="https://anotepad.com/notes/ra5esdy4" class="btn">Download</a>
-                </div>
-                <div class="tool-version">
-                    <p>Krnl (VNG chính thức) V2.697</p>
-                    <a href="https://anotepad.com/notes/6wars435" class="btn">Download</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="platform-section">
-            <div class="platform-header ios">
-                <i class="fab fa-apple"></i>
-                <h2>iOS</h2>
-            </div>
-
-            <div class="tool-card">
-                <div class="tool-header">
-                    <span class="tool-icon">🅺</span>
-                    <h3>Krnl</h3>
-                </div>
-                <div class="tool-version">
-                    <p>Krnl (VNG chính thức) V23</p>
-                    <p class="note">HuyMyThic IOS</p>
-                    <a href="https://link4m.com/hw9AZ" class="btn">Download</a>
+                <div class="app-card">
+                    <div class="app-header">
+                        <span class="app-icon">🅺</span>
+                        <h2>Krnl</h2>
+                    </div>
+                    <div class="app-version">
+                        <h3>Krnl (quốc tế) V2.697</h3>
+                        <a href="https://anotepad.com/notes/ra5esdy4" class="download-btn" target="_blank">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </div>
+                    <div class="app-version">
+                        <h3>Krnl (VNG chính thức) V2.697</h3>
+                        <a href="https://anotepad.com/notes/6wars435" class="download-btn" target="_blank">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="tool-card">
-                <div class="tool-header">
-                    <span class="tool-icon">🥷</span>
-                    <h3>Delta X</h3>
+            <!-- iOS Content (Hidden by default) -->
+            <div class="content-section" id="iosContent" style="display: none;">
+                <div class="app-card">
+                    <div class="app-header">
+                        <span class="app-icon">🅺</span>
+                        <h2>Krnl</h2>
+                    </div>
+                    <div class="app-version">
+                        <h3>Krnl (VNG chính thức) V23</h3>
+                        <p class="note">HuyMyThic IOS</p>
+                        <a href="https://link4m.com/hw9AZ" class="download-btn" target="_blank">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </div>
                 </div>
-                <div class="tool-version">
-                    <p>Delta X (VNG chính thức không cần file login) V41</p>
-                    <p class="note">HuyMyThic IOS</p>
-                    <a href="https://link4m.com/FKCyO8jE" class="btn">Download</a>
+
+                <div class="app-card">
+                    <div class="app-header">
+                        <span class="app-icon">🥷</span>
+                        <h2>Delta X</h2>
+                    </div>
+                    <div class="app-version">
+                        <h3>Delta X (VNG chính thức không cần file login) V41</h3>
+                        <p class="note">HuyMyThic IOS</p>
+                        <a href="https://link4m.com/FKCyO8jE" class="download-btn" target="_blank">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
 
         <footer>
-            <p>© 2023 DRGTeam Mode. All rights reserved.</p>
+            <p>© 2023 DRGteam Mode | Bản quyền thuộc HieuDRG</p>
         </footer>
     </div>
-<script src=""></script>
+
+    <script src="script.js"></script>
+<script src="https://huggingface.co/deepsite/deepsite-badge.js"></script>
 </body>
 </html>
