@@ -1,152 +1,511 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRGTeam Mode Portal</title>
-    <link rel="stylesheet" href="style.css">
+    <title>DRGteam Mode - Downloads Chính Thức</title>
+    <!-- Tải Tailwind CSS để sử dụng các class utility cho việc tạo kiểu -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3B82F6',
-                        secondary: '#10B981',
-                        dark: '#1E293B',
-                    }
-                }
+    <!-- Sử dụng font Inter cho giao diện hiện đại -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Đặt màu nền tối cho giao diện chuyên nghiệp */
+            background-color: #0d1117;
+        }
+        /* Custom styles for the code blocks */
+        .script-code {
+            background-color: #1e293b; /* slate-800 */
+            color: #f87171; /* red-400 */
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto; /* Quan trọng cho mobile để tránh tràn màn hình ngang */
+            max-height: 200px;
+            font-size: 0.875rem; /* Tăng kích thước font trên mobile cho dễ đọc hơn */
+        }
+        /* Cải thiện tiêu đề chính trên mobile */
+        @media (max-width: 640px) {
+            .main-title {
+                font-size: 3rem; /* Tùy chỉnh kích thước font cho mobile */
             }
         }
-    </script>
+    </style>
 </head>
-<body class="bg-gray-100 dark:bg-dark min-h-screen">
-    <header class="bg-white dark:bg-gray-800 shadow-md">
-        <div class="container mx-auto px-4 py-6">
-            <div class="flex justify-between items-center">
-                <h1 class="text-2xl font-bold text-primary dark:text-white">DRGTeam Mode Portal</h1>
-                <div class="flex items-center space-x-4">
-                    <button id="themeToggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
-                        <i data-feather="moon" class="text-gray-700 dark:text-gray-300"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+<body class="text-white min-h-screen p-4 sm:p-8">
+    
+    <!-- Tiêu đề chính của trang web -->
+    <header class="text-center py-8">
+        <h1 class="main-title text-4xl sm:text-5xl font-extrabold text-blue-400 tracking-wider">DRGteam Mode</h1>
+        <p class="text-lg sm:text-xl mt-2 text-gray-400">Tải xuống Clients/Executors & Scripts Chính Thức</p>
     </header>
 
-    <main class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Android Section -->
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-                <div class="bg-primary dark:bg-primary-dark p-4">
-                    <h2 class="text-xl font-bold text-white flex items-center">
-                        <i data-feather="smartphone" class="mr-2"></i> ANDROID
-                    </h2>
-                </div>
-                <div class="p-6">
-                    <!-- Delta X -->
-                    <div class="mb-8">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
-                            <span class="bg-gray-800 dark:bg-gray-700 text-white px-2 py-1 rounded mr-2">🥷</span>
-                            Delta X
-                        </h3>
-                        <div class="mt-4 space-y-4">
-                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                                <h4 class="font-medium text-gray-700 dark:text-gray-300">Delta X (quốc tế) V2.697</h4>
-                                <a href="https://anotepad.com/notes/tpkt96nb" target="_blank" class="mt-2 inline-block px-4 py-2 bg-primary hover:bg-primary-600 text-white rounded-lg transition duration-200">
-                                    <i data-feather="external-link" class="inline mr-1"></i> Access
-                                </a>
-                            </div>
-                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                                <h4 class="font-medium text-gray-700 dark:text-gray-300">Delta X (VNG chính thức không cần file login) V2.697</h4>
-                                <a href="https://anotepad.com/notes/8psbt7ym" target="_blank" class="mt-2 inline-block px-4 py-2 bg-primary hover:bg-primary-600 text-white rounded-lg transition duration-200">
-                                    <i data-feather="external-link" class="inline mr-1"></i> Access
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Krnl -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
-                            <span class="bg-gray-800 dark:bg-gray-700 text-white px-2 py-1 rounded mr-2">🅺</span>
-                            Krnl
-                        </h3>
-                        <div class="mt-4 space-y-4">
-                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                                <h4 class="font-medium text-gray-700 dark:text-gray-300">Krnl (quốc tế) V2.697</h4>
-                                <a href="https://anotepad.com/notes/ra5esdy4" target="_blank" class="mt-2 inline-block px-4 py-2 bg-primary hover:bg-primary-600 text-white rounded-lg transition duration-200">
-                                    <i data-feather="external-link" class="inline mr-1"></i> Access
-                                </a>
-                            </div>
-                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                                <h4 class="font-medium text-gray-700 dark:text-gray-300">Krnl (VNG chính thức) V2.697</h4>
-                                <a href="https://anotepad.com/notes/6wars435" target="_blank" class="mt-2 inline-block px-4 py-2 bg-primary hover:bg-primary-600 text-white rounded-lg transition duration-200">
-                                    <i data-feather="external-link" class="inline mr-1"></i> Access
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+    <main class="max-w-6xl mx-auto">
+        
+        <!-- Phần dành cho ANDROID -->
+        <section class="mb-12">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-6 border-b-4 border-blue-500 pb-2 inline-block">ANDROID</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Container cho các card Android -->
+                <div id="android-container" class="col-span-1 md:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Cards will be generated by JavaScript -->
                 </div>
             </div>
+        </section>
 
-            <!-- iOS Section -->
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-                <div class="bg-secondary dark:bg-secondary-dark p-4">
-                    <h2 class="text-xl font-bold text-white flex items-center">
-                        <i data-feather="tablet" class="mr-2"></i> iOS
-                    </h2>
-                </div>
-                <div class="p-6">
-                    <!-- Krnl -->
-                    <div class="mb-8">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
-                            <span class="bg-gray-800 dark:bg-gray-700 text-white px-2 py-1 rounded mr-2">🅺</span>
-                            Krnl
-                        </h3>
-                        <div class="mt-4">
-                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                                <h4 class="font-medium text-gray-700 dark:text-gray-300">Krnl (VNG chính thức) V23</h4>
-                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">HuyMyThic iOS</p>
-                                <a href="https://link4m.com/hw9AZ" target="_blank" class="mt-2 inline-block px-4 py-2 bg-secondary hover:bg-secondary-600 text-white rounded-lg transition duration-200">
-                                    <i data-feather="external-link" class="inline mr-1"></i> Access
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Delta X -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
-                            <span class="bg-gray-800 dark:bg-gray-700 text-white px-2 py-1 rounded mr-2">🥷</span>
-                            Delta X
-                        </h3>
-                        <div class="mt-4">
-                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                                <h4 class="font-medium text-gray-700 dark:text-gray-300">Delta X (VNG chính thức không cần file login) V41</h4>
-                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">HuyMyThic iOS</p>
-                                <a href="https://link4m.com/FKCyO8jE" target="_blank" class="mt-2 inline-block px-4 py-2 bg-secondary hover:bg-secondary-600 text-white rounded-lg transition duration-200">
-                                    <i data-feather="external-link" class="inline mr-1"></i> Access
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Phần dành cho IOS -->
+        <section class="mb-12">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-6 border-b-4 border-blue-500 pb-2 inline-block">IOS</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 <!-- Container cho các card iOS -->
+                <div id="ios-container" class="col-span-1 md:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Cards will be generated by JavaScript -->
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="mt-12 text-center text-gray-500 dark:text-gray-400 text-sm">
-            <p>© 2023 DRGTeam Mode Portal. All rights reserved.</p>
-            <p class="mt-1">Bản quyền thuộc HieuDRG</p>
-        </div>
+        <!-- PHẦN MỚI: BLOX FRUITS SCRIPTS (Tab đóng/mở) -->
+        <section class="mb-12">
+            <details id="scripts-details" class="group bg-gray-900 rounded-xl shadow-2xl overflow-hidden">
+                <summary class="flex items-center justify-between p-4 sm:p-6 cursor-pointer bg-gray-800 hover:bg-gray-700 transition duration-300">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-green-400">
+                        👾 Blox Fruits Scripts (Executor Code)
+                    </h2>
+                    <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </summary>
+                
+                <div id="scripts-container" class="p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Script cards will be generated by JavaScript -->
+                </div>
+            </details>
+        </section>
+
+        <!-- SCRIPT CHUNG ĐỂ TẠO CÁC CARD (Được đặt ở đây để đảm bảo các container đã được tải) -->
+        <script>
+            // --- Helper function for client downloads (Android/iOS) ---
+            function createClientCard(icon, name, link, statusEmoji, statusText, version) {
+                const card = document.createElement('div');
+                // Tăng padding trên mobile (p-4) và bình thường (sm:p-6)
+                card.className = 'bg-gray-800 p-4 sm:p-6 rounded-xl shadow-2xl transition duration-300 hover:scale-[1.02] hover:shadow-blue-500/50 flex flex-col justify-between';
+                
+                card.innerHTML = `
+                    <div class="flex items-start mb-4">
+                        <span class="text-3xl sm:text-4xl mr-3 sm:mr-4">${icon}</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-semibold text-blue-300">${name}</h3>
+                            <p class="text-xs sm:text-sm font-mono text-gray-500">${version}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Hiển thị trạng thái -->
+                    <div class="flex items-center mb-4 sm:mb-6">
+                        <span class="text-base sm:text-lg mr-2">${statusEmoji}</span>
+                        <span class="text-gray-300 font-medium text-sm sm:text-base">${statusText}</span>
+                    </div>
+                    
+                    <!-- Nút Tải Ngay -->
+                    <a href="${link}" target="_blank" class="w-full text-center py-2 sm:py-3 px-4 sm:px-6 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition duration-200 shadow-lg shadow-blue-500/50 uppercase transform hover:-translate-y-1 text-sm sm:text-base">
+                        Tải Ngay
+                    </a>
+                `;
+                return card;
+            }
+
+            // --- Helper function for script cards ---
+            function createScriptCard(name, keyStatus, features, code) {
+                const card = document.createElement('div');
+                card.className = 'bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg transition duration-300 hover:border-green-500/50 border border-gray-700 flex flex-col justify-between';
+                
+                let keyTag = '';
+                if (keyStatus) {
+                    const color = keyStatus.includes('NO KEY') ? 'bg-green-600' : (keyStatus.includes('Có KEY') ? 'bg-red-600' : 'bg-yellow-600');
+                    keyTag = `<span class="text-xs font-bold px-2 py-1 rounded-full ${color} text-white">${keyStatus}</span>`;
+                }
+
+                card.innerHTML = `
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg sm:text-xl font-bold text-green-300">${name}</h3>
+                            ${keyTag}
+                        </div>
+                        <p class="text-xs sm:text-sm text-gray-400 mt-1">${features}</p>
+                    </div>
+                    
+                    <!-- Code Block -->
+                    <div class="relative mb-4">
+                        <pre id="code-${name.replace(/\s/g, '-')}" class="script-code">${code.trim()}</pre>
+                        <button onclick="copyScriptCode(this, 'code-${name.replace(/\s/g, '-')}')" class="absolute top-2 right-2 p-1 sm:p-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded transition duration-200">
+                            Copy
+                        </button>
+                    </div>
+                    <!-- Message Box (Thêm nền màu để hiển thị rõ hơn trên mobile) -->
+                    <p id="message-${name.replace(/\s/g, '-')}" class="text-sm text-center bg-gray-700/50 py-1 rounded text-yellow-400 hidden">Đã sao chép!</p>
+                `;
+                return card;
+            }
+            
+            // --- Copy Functionality ---
+            function copyScriptCode(button, elementId) {
+                const codeElement = document.getElementById(elementId);
+                const messageElement = document.getElementById(`message-${elementId.substring(5)}`);
+                const code = codeElement.textContent;
+
+                // Copy to clipboard (using deprecated execCommand for broader compatibility in some environments)
+                const tempTextArea = document.createElement('textarea');
+                tempTextArea.value = code;
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempTextArea);
+
+                // Show success message and hide after 2 seconds
+                button.textContent = 'Đã Copy!';
+                button.disabled = true;
+                messageElement.style.display = 'block';
+
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.disabled = false;
+                    messageElement.style.display = 'hidden';
+                }, 2000);
+            }
+            window.copyScriptCode = copyScriptCode; // Expose to global scope for onclick handler
+
+            // --- Data Definitions (Giữ nguyên) ---
+            const androidClients = [
+                { icon: '🥷', name: 'Delta X (quốc tế)', version: 'V2.697', link: 'https://vuotlink.vip/MEuZj', status: '🟢', statusText: 'Đang Hoạt Động' },
+                { icon: '🥷', name: 'Delta X (VNG chính thức không cần file login)', version: 'V2.697', link: 'https://vuotlink.vip/b0jl', status: '🟢', statusText: 'Đang Hoạt Động' },
+                { icon: '💻', name: 'Code X (quốc tế)', version: 'V2.697', link: 'https://vuotlink.vip/9Rq', status: '🟢', statusText: 'Đang Hoạt Động' },
+                { icon: '💻', name: 'Code X (VNG chính thức)', version: 'V2.697', link: 'https://vuotlink.vip/RqfTF', status: '🟢', statusText: 'Đang Hoạt Động' },
+            ];
+
+            const iosClients = [
+                { icon: '🅺', name: 'Skib X [ thay thế Krnl ] (VNG chính thức)', version: 'V2 (HuyMyThic IOS)', link: 'https://www.mediafire.com/file/txu7cchvlzfp0iv/SkibXVN+V2+HuyMythic.ipa/file', status: '🟢', statusText: 'Đang Hoạt Động' },
+                { icon: '🥷', name: 'Delta X (VNG chính thức không cần file login)', version: 'V41 (HuyMyThic IOS)', link: 'https://www.mediafire.com/file/07torbga2ht6tuk/DeltaVN+V43+HuyMythic+AntiBan.ipa/file', status: '🟢', statusText: 'Đang Hoạt Động' },
+            ];
+
+            const bloxFruitsScripts = [
+                { 
+                    name: 'REDZ', 
+                    keyStatus: 'Có Cấu Hình', 
+                    features: 'Auto Farm, V4 Draco, Tùy chỉnh Team/Translator.', 
+                    code: `local Settings = {
+    JoinTeam = "Pirates", -- Pirates / Marines
+    Translator = true     -- true / false
+}
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/heads/main/main.luau"))(Settings)
+-- Alternative Redz (NEW)
+loadstring(game:HttpGet("https://pastefy.app/ACOX6D6h/raw"))()` 
+                },
+                { 
+                    name: 'Hiru Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm, Sea Event, Raid. Tùy chỉnh Team/JoinTeam.', 
+                    code: `getgenv().Settings = {
+    JoinTeam = true,
+    Team = "Marines"
+}
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/kiddohiru/Source/main/BloxFruits.lua"))()` 
+                },
+                { 
+                    name: 'Xeter Hub V3', 
+                    keyStatus: 'Có Cấu Hình', 
+                    features: 'Tùy chỉnh Version/Team.', 
+                    code: `getgenv().Version = "V3"
+getgenv().Team = "Marines"
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TlDinhKhoi/Xeter/refs/heads/main/Main.lua"))()` 
+                },
+                { 
+                    name: 'Soul Hub', 
+                    keyStatus: 'Không rõ', 
+                    features: 'Script đa chức năng.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/GoblinKun009/Script/refs/heads/main/soulhub", true))()` 
+                },
+                { 
+                    name: 'Quantum Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Script đa chức năng.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"))()` 
+                },
+                { 
+                    name: 'TxZ Hub', 
+                    keyStatus: 'Không rõ', 
+                    features: 'Auto Farm, Sea Event, Race V4, Tùy chỉnh.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/DrTxZ/Mercure-Hub/refs/heads/main/Mercure%20Hub.lua"))()` 
+                },
+                { 
+                    name: 'Blue X Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Find Fruits (RandomFruits), Tùy chỉnh BlackScreen.', 
+                    code: `getgenv().Config = {
+    ["Misc"] = {
+        ["RandomFruits"] = true,
+        ["BlackScreen"] = false,
+    }
+}
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/FindFruits.lua"))()` 
+                },
+                { 
+                    name: 'Zinner Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm, Sea Event, Raid. Tùy chỉnh Team (Pirates/Marines).', 
+                    code: `getgenv().Team = "Pirates"
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HoangNguyenk8/Roblox/refs/heads/main/BF-Main.luau"))()` 
+                },
+                { 
+                    name: 'Omg Hub', 
+                    keyStatus: 'Không rõ', 
+                    features: 'Auto Farm, Rain Fruit, Sea Event, Tùy chỉnh.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua"))()` 
+                },
+                { 
+                    name: 'Banana Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm, Sea Event, volcano, Raid.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Chiriku2013/BananaCatHub/refs/heads/main/BananaCatHub.lua"))()` 
+                },
+                { 
+                    name: 'Madox Hub', 
+                    keyStatus: 'Không rõ', 
+                    features: 'Auto Farm, Tùy chỉnh.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/GoblinKun009/Script/refs/heads/main/MadoxMain", true))()` 
+                },
+                { 
+                    name: 'StarryMoon Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm, V4 Draco. Tùy chỉnh Team.', 
+                    code: `repeat task.wait() until game:IsLoaded()
+repeat task.wait() until game.Players
+repeat task.wait() until game.Players.LocalPlayer
+
+getgenv().Team = "Marines" -- Can change Marines => Pirates
+
+loadstring(game:HttpGet("https://power-clock-api.vercel.app/api/clockbloxfruits", true))()` 
+                },
+                { 
+                    name: 'SYN Hub', 
+                    keyStatus: 'Không rõ', 
+                    features: 'Update gravity Auto Farm, Sea Event, Volcano.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/GoblinKun009/Script/refs/heads/main/ZynHub", true))()` 
+                },
+                { 
+                    name: 'Shinichi Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Script đa chức năng.', 
+                    code: `repeat wait() until game:IsLoaded()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/ShinichiHub.lua"))()` 
+                },
+                { 
+                    name: 'Arceney Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm, Sea Event.', 
+                    code: `loadstring(game.HttpGet(game, 'https://raw.githubusercontent.com/Yumiara/Python/refs/heads/main/BloxFruit-XYZ.lua'))()` 
+                },
+                { 
+                    name: 'Aurora Hub', 
+                    keyStatus: 'Không rõ', 
+                    features: 'Auto Farm, Rain Fruit, Raid.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Jadelly261/BloxFruits/main/Aurora", true))()` 
+                },
+                { 
+                    name: 'Yuri Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Update Gravity Auto Farm, Sea Event, Gun Mastery.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Jadelly261/BloxFruits/main/YuriMain", true))()` 
+                },
+                { 
+                    name: 'Volcano Hub V3', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm, Raid, Mastery.', 
+                    code: `loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/indexeduu/BF-NewVer/refs/heads/main/V3New.lua"))()` 
+                },
+                { 
+                    name: 'Solix Hub', 
+                    keyStatus: 'Không rõ', 
+                    features: 'Script đa chức năng.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/debunked69/solixloader/refs/heads/main/solix%20v2%20new%20loader.lua"))()` 
+                },
+                { 
+                    name: 'Vxeze Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm, Raid, Gun Mastery, Kill Tyrant Boss, Volcano Event.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Dex-Bear/Vxezehub/refs/heads/main/VxezeHubMain"))()
+-- Alternative Vxeze Hub
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Dex-Bear/Vxezehub/refs/heads/main/Skidlamcho.txt"))()` 
+                },
+                { 
+                    name: 'Muxus Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm, Volcano Event. Tùy chỉnh Team (Pirates/Marines).', 
+                    code: `getgenv().Team = "Pirates"
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/MuxusTL/BloxFruits/main/MuxusHub.lua"))()` 
+                },
+                { 
+                    name: 'Maru Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm, Raid, Rain Fruit. Tùy chỉnh Team (Pirates/Marines).', 
+                    code: `getgenv().Team = "Marines"
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaCrack/KimP/refs/heads/main/MaruHub"))()` 
+                },
+                { 
+                    name: 'HOHO V4', 
+                    keyStatus: 'Không rõ', 
+                    features: 'Auto Farm, Sea Event.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()` 
+                },
+                { 
+                    name: 'Shark X Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm, Raid.', 
+                    code: `loadstring(game:HttpGet("https://shorturl.at/kyOxL"))()` 
+                },
+                { 
+                    name: 'Quartz Kaitun Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Kaitun, Farm, Tùy chỉnh Level/Team/Fruits.', 
+                    code: `getgenv().Mode = "OneClick"
+
+getgenv().Setting = {
+    ["Team"] = "Pirates", -- "Pirates", "Marines"
+    ["FucusOnLevel"] = true,
+    ["Fruits"] = {
+        ["Primary"] = {
+            "Dough-Dough",
+            "Dragon-Dragon",
+            "Buddha-Buddha",
+        },
+        ["Normal"] = {
+            "Flame-Flame",
+            "Light-Light",
+            "Magma-Magma",
+        }
+    },
+    ["IdleCheck"] = 150, -- seconds
+}
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/xQuartyx/QuartyzScript/main/Loader.lua"))()` 
+                },
+                { 
+                    name: 'Lion Hub', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm, Sea Event, V4 Draco. Tùy chỉnh Team.', 
+                    code: `repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+
+getgenv().team = "Pirates" -- Marines
+
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e0c7fcf6c077fc23475cf4ce4db58e42.lua"))()` 
+                },
+                { 
+                    name: 'The BillDev Hub', 
+                    keyStatus: 'Có KEY (Key System)', 
+                    features: 'Auto Farm, Mastery.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/selciawashere/screepts/refs/heads/main/BFKEYSYS", true))()` 
+                },
+                { 
+                    name: 'Frostware Hub (Chest)', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm Chest, Beli.', 
+                    code: `loadstring(game:HttpGet("https://frostware.onrender.com/fwchest"))()` 
+                },
+                { 
+                    name: 'Frostware Hub (Main)', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Script đa chức năng.', 
+                    code: `loadstring(game:HttpGet("https://frostware.onrender.com/fw"))()` 
+                },
+                { 
+                    name: 'TSUO BETA', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm, Sea Event, RACE V4 PVP.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Tsuo7/TsuoHub/main/Tsuoscripts"))()` 
+                },
+                { 
+                    name: 'Blue X', 
+                    keyStatus: 'NO KEY', 
+                    features: 'Auto Farm, Sea Event, Magnet.', 
+                    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua"))()` 
+                },
+            ];
+
+            // --- Main Rendering Logic ---
+
+            // Render Android Clients
+            const androidContainer = document.querySelector('#android-container');
+            if (androidContainer) {
+                androidClients.forEach(client => {
+                    androidContainer.appendChild(createClientCard(
+                        client.icon, 
+                        client.name, 
+                        client.link, 
+                        client.status, 
+                        client.statusText, 
+                        client.version
+                    ));
+                });
+            }
+
+            // Render iOS Clients
+            const iosContainer = document.querySelector('#ios-container');
+            if (iosContainer) {
+                iosClients.forEach(client => {
+                    const card = createClientCard(
+                        client.icon, 
+                        client.name, 
+                        client.link, 
+                        client.status, 
+                        client.statusText, 
+                        client.version
+                    );
+                    
+                    const button = card.querySelector('a');
+                    if (client.version.includes('HuyMyThic IOS')) {
+                         button.textContent = 'TẢI NGAY (HuyMyThic)';
+                    }
+                    
+                    iosContainer.appendChild(card);
+                });
+            }
+
+            // Render Blox Fruits Scripts
+            const scriptsContainer = document.querySelector('#scripts-container');
+            if (scriptsContainer) {
+                // Sắp xếp theo thứ tự bảng chữ cái để dễ tìm kiếm
+                bloxFruitsScripts.sort((a, b) => a.name.localeCompare(b.name)).forEach(script => {
+                    scriptsContainer.appendChild(createScriptCard(
+                        script.name, 
+                        script.keyStatus, 
+                        script.features, 
+                        script.code
+                    ));
+                });
+            }
+
+            // --- Temporary Notification Placeholder ---
+            // In case execCommand fails, the user might not see the success. 
+            // This is usually fine, but a proper notification system would be better.
+
+        </script>
+
     </main>
 
-    <script src="script.js"></script>
-    <script>
-        feather.replace();
-    </script>
-<script src=""></script>
+    <!-- Footer và thông tin bản quyền -->
+    <footer class="mt-16 py-6 border-t border-gray-700 text-center text-gray-500">
+        <p>&copy; 2024 DRGteam Mode. Bảo lưu mọi quyền.</p>
+        <p class="text-sm mt-1">Bản quyền thuộc về HieuDRG.</p>
+    </footer>
+
 </body>
 </html>
