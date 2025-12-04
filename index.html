@@ -58,6 +58,30 @@
             align-items: center;
             z-index: 1000;
         }
+
+        /* Google button specific style */
+        .google-btn {
+            background-color: #4285f4;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #3c7de0;
+            transition: background-color 0.3s;
+        }
+        .google-btn:hover {
+            background-color: #357ae8;
+        }
+        .google-icon-wrapper {
+            background-color: white;
+            padding: 8px;
+            border-radius: 4px;
+            margin-right: 12px;
+        }
+        .google-icon {
+            width: 18px;
+            height: 18px;
+        }
     </style>
 </head>
 <body class="text-white min-h-screen p-0">
@@ -119,6 +143,29 @@
         <div id="login-modal" class="modal-backdrop">
             <div class="bg-gray-800 p-6 rounded-xl shadow-2xl w-full max-w-sm border border-gray-700">
                 <h3 class="text-2xl font-bold mb-4 text-blue-300">Đăng Nhập</h3>
+                
+                <!-- Nút Đăng nhập bằng Google -->
+                <button type="button" id="google-login-btn" class="google-btn w-full py-2 mb-4 rounded-lg font-semibold transition duration-200 shadow-md">
+                    <div class="google-icon-wrapper">
+                        <!-- Google SVG Icon -->
+                        <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" enable-background="new 0 0 48 48">
+                            <g>
+                                <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.618 3.167-4.919 5.333-9.303 5.333-6.76 0-12.26-5.498-12.26-12.26s5.498-12.26 12.26-12.26c3.187 0 6.098 1.29 8.243 3.42l5.79-5.79C37.4 2.82 31.83 0 24 0 10.745 0 0 10.745 0 24s10.745 24 24 24c11.082 0 20.353-8.026 22.189-18.514V28h-6v-3.917h-0.389z"/>
+                                <path fill="#FF3D00" d="M6.306 14.693l6.571 4.975c-1.545 3.102-2.316 6.577-2.316 10.102 0 7.747 5.093 14.245 12.012 16.514C11.534 45.47 2.112 37.001 2.112 28C2.112 24.239 2.946 20.65 4.545 17.514l1.761-2.821z"/>
+                                <path fill="#4CAF50" d="M43.611 20.083h-2.389v-0.083H24v8h11.303c-1.618 3.167-4.919 5.333-9.303 5.333-6.76 0-12.26-5.498-12.26-12.26s5.498-12.26 12.26-12.26c3.187 0 6.098 1.29 8.243 3.42l5.79-5.79C37.4 2.82 31.83 0 24 0 10.745 0 0 10.745 0 24s10.745 24 24 24c11.082 0 20.353-8.026 22.189-18.514V28h-6v-3.917h-0.389z"/>
+                                <path fill="#1976D2" d="M6.306 14.693l6.571 4.975c-1.545 3.102-2.316 6.577-2.316 10.102 0 7.747 5.093 14.245 12.012 16.514C11.534 45.47 2.112 37.001 2.112 28C2.112 24.239 2.946 20.65 4.545 17.514l1.761-2.821z"/>
+                            </g>
+                        </svg>
+                    </div>
+                    Đăng nhập bằng Google
+                </button>
+                
+                <div class="flex items-center justify-center mb-4">
+                    <hr class="w-full border-gray-600">
+                    <span class="px-3 text-gray-500 text-sm">hoặc</span>
+                    <hr class="w-full border-gray-600">
+                </div>
+
                 <form id="login-form">
                     <div class="mb-4">
                         <label for="login-email" class="block text-sm font-medium text-gray-400 mb-1">Email</label>
@@ -129,7 +176,7 @@
                         <input type="password" id="login-password" class="w-full p-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:ring-blue-500 focus:border-blue-500" required>
                     </div>
                     <p id="login-error-message" class="text-red-400 text-sm mb-4 hidden"></p>
-                    <button type="submit" class="w-full py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold transition duration-200">Đăng Nhập</button>
+                    <button type="submit" class="w-full py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold transition duration-200">Đăng Nhập bằng Email</button>
                     <button type="button" onclick="closeModal('login-modal')" class="w-full mt-3 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg text-white font-semibold transition duration-200">Hủy</button>
                     <p class="text-center text-sm text-gray-400 mt-4">Chưa có tài khoản? 
                         <a href="#" onclick="showRegisterFromLogin()" class="text-cyan-400 hover:text-cyan-300 font-medium">Đăng Ký</a>
@@ -142,6 +189,29 @@
         <div id="register-modal" class="modal-backdrop">
             <div class="bg-gray-800 p-6 rounded-xl shadow-2xl w-full max-w-sm border border-gray-700">
                 <h3 class="text-2xl font-bold mb-4 text-green-300">Đăng Ký Tài Khoản</h3>
+                
+                <!-- Nút Đăng nhập bằng Google (Cũng dùng cho đăng ký nhanh) -->
+                <button type="button" id="google-register-btn" class="google-btn w-full py-2 mb-4 rounded-lg font-semibold transition duration-200 shadow-md">
+                    <div class="google-icon-wrapper">
+                        <!-- Google SVG Icon -->
+                        <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" enable-background="new 0 0 48 48">
+                            <g>
+                                <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.618 3.167-4.919 5.333-9.303 5.333-6.76 0-12.26-5.498-12.26-12.26s5.498-12.26 12.26-12.26c3.187 0 6.098 1.29 8.243 3.42l5.79-5.79C37.4 2.82 31.83 0 24 0 10.745 0 0 10.745 0 24s10.745 24 24 24c11.082 0 20.353-8.026 22.189-18.514V28h-6v-3.917h-0.389z"/>
+                                <path fill="#FF3D00" d="M6.306 14.693l6.571 4.975c-1.545 3.102-2.316 6.577-2.316 10.102 0 7.747 5.093 14.245 12.012 16.514C11.534 45.47 2.112 37.001 2.112 28C2.112 24.239 2.946 20.65 4.545 17.514l1.761-2.821z"/>
+                                <path fill="#4CAF50" d="M43.611 20.083h-2.389v-0.083H24v8h11.303c-1.618 3.167-4.919 5.333-9.303 5.333-6.76 0-12.26-5.498-12.26-12.26s5.498-12.26 12.26-12.26c3.187 0 6.098 1.29 8.243 3.42l5.79-5.79C37.4 2.82 31.83 0 24 0 10.745 0 0 10.745 0 24s10.745 24 24 24c11.082 0 20.353-8.026 22.189-18.514V28h-6v-3.917h-0.389z"/>
+                                <path fill="#1976D2" d="M6.306 14.693l6.571 4.975c-1.545 3.102-2.316 6.577-2.316 10.102 0 7.747 5.093 14.245 12.012 16.514C11.534 45.47 2.112 37.001 2.112 28C2.112 24.239 2.946 20.65 4.545 17.514l1.761-2.821z"/>
+                            </g>
+                        </svg>
+                    </div>
+                    Đăng ký bằng Google
+                </button>
+
+                <div class="flex items-center justify-center mb-4">
+                    <hr class="w-full border-gray-600">
+                    <span class="px-3 text-gray-500 text-sm">hoặc</span>
+                    <hr class="w-full border-gray-600">
+                </div>
+
                 <form id="register-form">
                     <div class="mb-4">
                         <label for="register-email" class="block text-sm font-medium text-gray-400 mb-1">Email</label>
@@ -152,7 +222,7 @@
                         <input type="password" id="register-password" class="w-full p-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:ring-green-500 focus:border-green-500" required>
                     </div>
                     <p id="register-error-message" class="text-red-400 text-sm mb-4 hidden"></p>
-                    <button type="submit" class="w-full py-2 bg-green-600 hover:bg-green-700 rounded-lg text-white font-semibold transition duration-200">Đăng Ký</button>
+                    <button type="submit" class="w-full py-2 bg-green-600 hover:bg-green-700 rounded-lg text-white font-semibold transition duration-200">Đăng Ký bằng Email</button>
                     <button type="button" onclick="closeModal('register-modal')" class="w-full mt-3 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg text-white font-semibold transition duration-200">Hủy</button>
                 </form>
             </div>
@@ -170,12 +240,23 @@
         <!-- SCRIPT CHUNG ĐỂ TẠO CÁC CARD VÀ XỬ LÝ AUTH -->
         <script type="module">
             import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-            import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+            import { 
+                getAuth, 
+                signInAnonymously, 
+                signInWithCustomToken, 
+                onAuthStateChanged, 
+                createUserWithEmailAndPassword, 
+                signInWithEmailAndPassword, 
+                signOut,
+                GoogleAuthProvider, // Thêm GoogleAuthProvider
+                signInWithPopup     // Thêm signInWithPopup
+            } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
             import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
             import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
             
             // --- FIREBASE SETUP AND AUTHENTICATION ---
             let auth, db;
+            const googleProvider = new GoogleAuthProvider(); // Khởi tạo Google Provider
 
             const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
             const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
@@ -246,9 +327,9 @@
                 authStatusDiv.innerHTML = ''; // Clear current status
 
                 if (user && !user.isAnonymous) {
-                    // Logged in (Email/Password user)
+                    // Logged in (Email/Password or Google user)
                     // Truncate email for display simplicity
-                    const displayEmail = user.email.length > 20 ? user.email.substring(0, 20) + '...' : user.email;
+                    const displayEmail = user.email ? (user.email.length > 20 ? user.email.substring(0, 20) + '...' : user.email) : 'Người dùng Google';
                     
                     authStatusDiv.innerHTML = `
                         <div class="text-sm text-gray-300 flex items-center space-x-2">
@@ -331,6 +412,7 @@
                     await setDoc(userDocRef, {
                         email: user.email,
                         createdAt: new Date().toISOString(),
+                        loginMethod: 'email',
                         appId: appId
                     });
 
@@ -352,13 +434,63 @@
                 }
             });
 
+            // --- GOOGLE AUTH HANDLER ---
+
+            async function handleGoogleAuth() {
+                if (!auth) {
+                    showMessage("Lỗi: Hệ thống Auth không khả dụng.");
+                    return;
+                }
+                
+                try {
+                    // Dùng signInWithPopup để mở cửa sổ Google đăng nhập
+                    const result = await signInWithPopup(auth, googleProvider);
+                    const user = result.user;
+
+                    // Kiểm tra và lưu thông tin vào Firestore nếu là người dùng mới
+                    const userDocRef = doc(db, `/artifacts/${appId}/users/${user.uid}/profile/metadata`);
+                    // Sử dụng setDoc với { merge: true } để không ghi đè nếu tài liệu đã tồn tại
+                    await setDoc(userDocRef, {
+                        email: user.email,
+                        displayName: user.displayName,
+                        photoURL: user.photoURL,
+                        lastLoginAt: new Date().toISOString(),
+                        loginMethod: 'google',
+                        appId: appId
+                    }, { merge: true });
+
+                    closeModal('login-modal');
+                    closeModal('register-modal');
+                    showMessage("Đăng nhập bằng Google thành công!");
+
+                } catch (error) {
+                    let message = "Đăng nhập bằng Google thất bại.";
+                    // Xử lý các lỗi phổ biến
+                    if (error.code === 'auth/popup-closed-by-user') {
+                        message = "Đã hủy đăng nhập. Vui lòng thử lại.";
+                    } else if (error.code === 'auth/cancelled-popup-request') {
+                         message = "Yêu cầu đăng nhập bị hủy do có popup khác đang chạy.";
+                    } else {
+                        message += " Vui lòng kiểm tra console để biết chi tiết.";
+                    }
+
+                    showMessage(message);
+                    console.error("Google Auth Error:", error);
+                }
+            }
+            
+            // Gán handler cho các nút Google
+            document.getElementById('google-login-btn')?.addEventListener('click', handleGoogleAuth);
+            document.getElementById('google-register-btn')?.addEventListener('click', handleGoogleAuth);
+
+
             async function handleLogout() {
                 if (!auth) return;
                 try {
                     await signOut(auth);
                     showMessage("Bạn đã đăng xuất thành công.");
-                    // After logging out, Firebase will trigger onAuthStateChanged with null user, 
-                    // which handles re-signing in with the custom token or anonymously.
+                    // Sau khi đăng xuất, Firebase sẽ kích hoạt onAuthStateChanged với user=null, 
+                    // sau đó sẽ tự động đăng nhập lại bằng Custom Token hoặc ẩn danh.
                 } catch (error) {
                     showMessage("Lỗi khi đăng xuất. Vui lòng thử lại.");
                     console.error("Logout Error:", error);
