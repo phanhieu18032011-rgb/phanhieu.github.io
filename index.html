@@ -523,6 +523,12 @@
     <header>
         <h1>DRGTeam</h1>
         <div class="copyright">© Copyright HieuDRG</div>
+        <div style="margin-top: 15px;">
+            <audio id="bgMusic" style="width: 200px;" controls>
+                <source src="https://www.youtube.com/watch?v=1DHtFR_Emcs" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
     </header>
 
     <div class="container">
@@ -643,6 +649,33 @@
                 const clientName = this.closest('.app-card').querySelector('.app-name').textContent.trim();
                 showDownModal(clientName);
             });
+        });
+
+        // Music Control
+        let isPlaying = true;
+        const musicBtn = document.getElementById('musicBtn');
+        const musicStatus = document.getElementById('musicStatus');
+
+        function toggleMusic() {
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+                musicBtn.textContent = '🎵 Nhạc Nền: BẬT';
+                musicStatus.textContent = '🔊 Đang phát';
+                musicStatus.style.color = '#22c55e';
+                // YouTube embed sẽ tự phát khi được cho phép
+                document.getElementById('youtubePlayer').src = 'https://www.youtube.com/embed/1DHtFR_Emcs?autoplay=1&controls=0&modestbranding=1';
+            } else {
+                musicBtn.textContent = '🎵 Nhạc Nền: TẮT';
+                musicStatus.textContent = '🔇 Đã tắt';
+                musicStatus.style.color = '#ef4444';
+                // Tắt nhạc bằng cách xóa src
+                document.getElementById('youtubePlayer').src = '';
+            }
+        }
+
+        // Auto play music when page loads
+        window.addEventListener('load', function() {
+            console.log('Trang web đã load - Nhạc sẽ tự phát');
         });
     </script>
 </body>
