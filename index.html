@@ -156,6 +156,31 @@
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 1px solid rgba(255, 190, 11, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status {
+            font-size: 1em;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status.online {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid #22c55e;
+        }
+
+        .status.down {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid #ef4444;
         }
 
         .app-info {
@@ -408,30 +433,42 @@
             <div class="apps-grid">
                 <div class="app-card">
                     <div class="app-name"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6GEhelLEiFqBUCxwBOiU1ChE1g51DyLW07U2rI4GfA&s" alt="Delta X" style="height: 30px; margin-right: 10px; vertical-align: middle;"> Delta X</div>
-                    <div class="app-version">International - V2.702.662</div>
+                    <div class="app-version">
+                        <span>International - V2.702.662</span>
+                        <span class="status down">🔴 Down</span>
+                    </div>
                     <div class="app-info">Phiên bản Delta X quốc tế mới nhất với hiệu suất tối ưu.</div>
                     <a href="https://delta.filenetwork.vip/android.html" class="download-btn">Download</a>
                 </div>
 
                 <div class="app-card">
                     <div class="app-name"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6GEhelLEiFqBUCxwBOiU1ChE1g51DyLW07U2rI4GfA&s" alt="Delta X" style="height: 30px; margin-right: 10px; vertical-align: middle;"> Delta X</div>
-                    <div class="app-version">VNG Official - V2.702.632</div>
+                    <div class="app-version">
+                        <span>VNG Official - V2.702.632</span>
+                        <span class="status online">🟢 Online</span>
+                    </div>
                     <div class="app-info">Phiên bản chính thức VNG không cần file login, dễ sử dụng.</div>
                     <a href="https://www.mediafire.com/file/0c19asxqi360r10/Delta_Vng_V2.702.632_Up.apk/file" class="download-btn">Download</a>
                 </div>
 
                 <div class="app-card">
                     <div class="app-name">Fluxus Z</div>
-                    <div class="app-version">International - V3.0.6</div>
+                    <div class="app-version">
+                        <span>International - V3.0.6</span>
+                        <span class="status down">🔴 Down</span>
+                    </div>
                     <div class="app-info">Phiên bản Fluxus Z quốc tế với tính năng mới.</div>
                     <a href="https://www.mediafire.com/file/7iizmrzio32qsve/FluxusZ+V3.0.6+ARM64.apk/file" class="download-btn">Download</a>
                 </div>
 
                 <div class="app-card">
                     <div class="app-name">Fluxus Z</div>
-                    <div class="app-version">VNG Official - V3.0.6</div>
-                    <div class="app-info">Fluxus Z chính thức từ VNG, ổn định và đáng tin cậy.</div>
-                    <a href="https://www.mediafire.com/file/v2iuh5a7klnu84j/FluxusZ+V3.0.6+VNG+ARM64.apk/file" class="download-btn">Download</a>
+                    <div class="app-version">
+                        <span>VNG Official - V2.703</span>
+                        <span class="status online">🟢 Online</span>
+                    </div>
+                    <div class="app-info">Fluxus Z VNG bản mới nhất hiện tại - Hỗ trợ 32Bit & 64Bit, Font Chữ Thương.</div>
+                    <a href="https://www.mediafire.com/file/dqpjb2mf5h20p8j/FluxuZ+VNG+32Bit+&+64Bit+Font+Chữ+Thương.apk/file" class="download-btn">Download</a>
                 </div>
             </div>
         </div>
@@ -443,16 +480,22 @@
             <div class="apps-grid">
                 <div class="app-card">
                     <div class="app-name">🅺 Skib X</div>
-                    <div class="app-version">VNG Super Fix Lag - V698</div>
-                    <div class="app-info">Skib X phiên bản siêu fix lag, thay thế cho Krnl. By NgocBongGaming</div>
-                    <a href="https://www.mediafire.com/file/5j6uusfyy6fkw4f/SkibxVN+Fixlag_2.698.937_1763996205.ipa/file" class="download-btn">Download</a>
+                    <div class="app-version">
+                        <span>VNG No Key - V2.701</span>
+                        <span class="status online">🟢 Online</span>
+                    </div>
+                    <div class="app-info">Skib X phiên bản VNG V2.701 No Key - Không cần key, dễ sử dụng và ổn định</div>
+                    <a href="https://nhapcode1s.com/ipas/SkibxVN_1765075400.ipa" class="download-btn">Download</a>
                 </div>
 
                 <div class="app-card">
                     <div class="app-name"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6GEhelLEiFqBUCxwBOiU1ChE1g51DyLW07U2rI4GfA&s" alt="Delta X" style="height: 30px; margin-right: 10px; vertical-align: middle;"> Delta X</div>
-                    <div class="app-version">VNG Official - V702</div>
-                    <div class="app-info">Delta X phiên bản VNG chính thức cho iOS. By NgocBongGaming</div>
-                    <a href="https://www.mediafire.com/file/sxfb8qi4u2xqkci/DeltaVN+New_2.702.613_1765538756.ipa/file" class="download-btn">Download</a>
+                    <div class="app-version">
+                        <span>VNG Official - V703</span>
+                        <span class="status online">🟢 Online</span>
+                    </div>
+                    <div class="app-info">Delta X V703 Fix Lỗi Mất Nút Di Chuyển Khi Chạy Script - Phiên bản VNG chính thức cho iOS</div>
+                    <a href="https://www.mediafire.com/file/jnmkwurdjq6430z/nPt35u4DMEU148JP.ipa/file" class="download-btn">Download</a>
                 </div>
             </div>
         </div>
