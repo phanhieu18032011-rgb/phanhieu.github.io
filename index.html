@@ -3,1080 +3,464 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRGteam Mode - Tải xuống Clients và Scripts</title>
-    <!-- Tải Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Cấu hình Tailwind cho font Inter và màu sắc tùy chỉnh -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-dark': '#1e293b', // Slate 800
-                        'secondary-dark': '#334155', // Slate 700
-                        'accent': '#60a5fa', // Blue 400 (Dùng cho tab Scripts)
-                        'ios': '#6366f1', // Indigo 500
-                        'android': '#10b981', // Emerald 500
-                        'status-online': '#10b981', // Green 500
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
+    <title>DRGTeam - Official Downloads</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #ff006e;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 3em;
+            background: linear-gradient(45deg, #ff006e, #fb5607, #ffbe0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        .copyright {
+            font-size: 0.9em;
+            color: #aaa;
+            margin-top: 10px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            color: #ffbe0b;
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .section-title img {
+            filter: brightness(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section-title:hover img {
+            transform: scale(1.1);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff006e, #ffbe0b);
+            animation: expandWidth 0.8s ease-out;
+        }
+
+        /* DESKTOP LAYOUT */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .app-card {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(251, 86, 7, 0.1) 100%);
+            border: 2px solid #ff006e;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: popIn 0.6s ease-out backwards;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-card:nth-child(1) { animation-delay: 0.1s; }
+        .app-card:nth-child(2) { animation-delay: 0.2s; }
+        .app-card:nth-child(3) { animation-delay: 0.3s; }
+        .app-card:nth-child(4) { animation-delay: 0.4s; }
+        .app-card:nth-child(5) { animation-delay: 0.5s; }
+        .app-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .app-card:hover::before {
+            left: 100%;
+        }
+
+        .app-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffbe0b;
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.5);
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.2) 0%, rgba(251, 86, 7, 0.2) 100%);
+        }
+
+        .app-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ffbe0b;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .app-version {
+            color: #aaa;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 190, 11, 0.3);
+        }
+
+        .app-info {
+            color: #ddd;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff006e, #fb5607);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.4);
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 0, 110, 0.6);
+            background: linear-gradient(135deg, #fb5607, #ffbe0b);
+        }
+
+        .download-btn:active {
+            transform: scale(0.98);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 3px solid #ff006e;
+            margin-top: 50px;
+            color: #aaa;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-    </script>
-    <style>
-        /* Thiết lập font Inter */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-        /* Custom styling cho nút download đẹp hơn và lớn hơn */
-        .download-button {
-            transition: all 0.2s ease-in-out;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .download-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .download-button:active {
-            transform: translateY(0);
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        /* Custom scrollbar cho các trình duyệt hỗ trợ */
-        ::-webkit-scrollbar {
-            width: 8px;
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
-        ::-webkit-scrollbar-track {
-            background: #1e293b;
+
+        @keyframes expandWidth {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100px;
+            }
         }
-        ::-webkit-scrollbar-thumb {
-            background: #475569;
-            border-radius: 4px;
+
+        /* TABLET */
+        @media (max-width: 1024px) {
+            .apps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #64748b;
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2em;
+            }
+
+            .copyright {
+                font-size: 0.8em;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .section {
+                margin-bottom: 40px;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+                letter-spacing: 1px;
+            }
+
+            .section-title::after {
+                width: 80px;
+            }
+
+            /* MOBILE GRID - 1 COLUMN */
+            .apps-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin-top: 20px;
+            }
+
+            .app-card {
+                padding: 20px;
+                border-radius: 12px;
+                animation: slideInUp 0.5s ease-out backwards;
+            }
+
+            .app-card:nth-child(1) { animation-delay: 0.05s; }
+            .app-card:nth-child(2) { animation-delay: 0.1s; }
+            .app-card:nth-child(3) { animation-delay: 0.15s; }
+            .app-card:nth-child(4) { animation-delay: 0.2s; }
+            .app-card:nth-child(5) { animation-delay: 0.25s; }
+            .app-card:nth-child(6) { animation-delay: 0.3s; }
+
+            .app-card:hover {
+                transform: translateY(-5px);
+            }
+
+            .app-name {
+                font-size: 1.3em;
+                margin-bottom: 8px;
+            }
+
+            .app-version {
+                font-size: 0.85em;
+                margin-bottom: 12px;
+                padding-bottom: 8px;
+            }
+
+            .app-info {
+                font-size: 0.9em;
+                margin-bottom: 15px;
+            }
+
+            .download-btn {
+                padding: 11px 25px;
+                font-size: 0.95em;
+                border-radius: 20px;
+            }
+
+            footer {
+                padding: 20px;
+            }
+
+            footer p {
+                font-size: 0.9em;
+            }
+        }
+
+        /* SMALL MOBILE */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .container {
+                padding: 15px 12px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+                margin-bottom: 15px;
+            }
+
+            .apps-grid {
+                gap: 12px;
+            }
+
+            .app-card {
+                padding: 15px;
+            }
+
+            .app-name {
+                font-size: 1.1em;
+            }
+
+            .app-version {
+                font-size: 0.8em;
+            }
+
+            .app-info {
+                font-size: 0.85em;
+                margin-bottom: 12px;
+            }
+
+            .download-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white font-sans min-h-screen p-4 sm:p-8">
-
-    <!-- Header - Tên web và Logo -->
-    <header class="text-center mb-12">
-        <h1 class="text-5xl sm:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-accent to-android">
-            DRGteam <span class="text-accent">Mode</span>
-        </h1>
-        <p class="text-xl sm:text-2xl text-gray-400 mt-2">Nơi tải xuống clients chính thức và scripts.</p>
+<body>
+    <header>
+        <h1>DRGTeam</h1>
+        <div class="copyright">© Copyright HieuDRG</div>
     </header>
 
-    <!-- Main Content - Chia thành 3 tab: ANDROID, IOS, và BLOX FRUIT SCRIPTS -->
-    <main class="max-w-7xl mx-auto">
-        <div class="bg-primary-dark rounded-xl shadow-2xl p-4 sm:p-8">
-
-            <!-- Tab Navigation -->
-            <div class="flex border-b border-gray-700 mb-6 flex-wrap">
-                <!-- Tab Android (Active) -->
-                <button id="tab-android" onclick="switchTab('android')"
-                        class="flex-1 min-w-[33%] sm:min-w-0 px-4 py-3 text-lg font-semibold border-b-2 border-android text-android transition duration-300 ease-in-out">
-                    <span class="inline-block mr-1 text-xl align-middle">
-                        <!-- Icon Android SVG -->
-                        <svg class="w-6 h-6 inline" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.5 12c-1.39 0-2.5 1.11-2.5 2.5s1.11 2.5 2.5 2.5 2.5-1.11 2.5-2.5-1.11-2.5-2.5-2.5zm-11 0c-1.39 0-2.5 1.11-2.5 2.5s1.11 2.5 2.5 2.5 2.5-1.11 2.5-2.5-1.11-2.5-2.5-2.5zm10 10h-8c-2.76 0-5-2.24-5-5V7c0-1.66 1.34-3 3-3 0-1.66 1.34-3 3-3s3 1.34 3 3c1.66 0 3 1.34 3 3v10c0 2.76-2.24 5-5 5zm-1-17h-6c-.55 0-1 .45-1 1s.45 1 1 1h6c.55 0 1-.45 1-1s-.45-1-1-1z"/>
-                        </svg>
-                    </span>
-                    ANDROID
-                </button>
-                <!-- Tab IOS -->
-                <button id="tab-ios" onclick="switchTab('ios')"
-                        class="flex-1 min-w-[33%] sm:min-w-0 px-4 py-3 text-lg font-semibold border-b-2 border-transparent text-gray-400 hover:text-ios hover:border-ios transition duration-300 ease-in-out">
-                    <span class="inline-block mr-1 text-xl align-middle">
-                        <!-- Icon Apple/IOS SVG -->
-                        <svg class="w-6 h-6 inline" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.225 21.085c.44-.047.88-.047 1.32-.047 1.378 0 2.804.422 3.93 1.112 1.49-.915 2.396-2.455 2.522-4.108.062-.77.014-1.54-.112-2.298-.198-1.218-.737-2.31-1.61-3.136-.36-.337-.73-.66-1.127-.978-1.127-.9-2.55-1.464-4.04-1.464-1.554 0-2.98.57-4.136 1.505-1.22.99-2.072 2.345-2.34 3.86-.208 1.19-.185 2.45.105 3.61.164.67.4 1.31.71 1.91 1.09-1.28 2.57-1.92 4.19-1.92 1.378 0 2.65.412 3.65 1.14-.15-.81-.23-1.62-.23-2.43 0-2.14 1.63-3.89 3.65-3.89 2.02 0 3.65 1.75 3.65 3.89 0 2.12-.04 4.24-.04 6.36 0 .53.1 1.05.3 1.54.43-1.21.72-2.53.84-3.89.04-.49-.06-1.02-.27-1.5-.15-.36-.34-.7-.57-1.01-1.34-1.8-3.5-2.76-5.87-2.76-2.21 0-4.32.8-5.9 2.13-1.46 1.25-2.31 2.91-2.49 4.74-.06.74-.03 1.5.09 2.22.18 1.14.54 2.19 1.11 3.14.77 1.25 1.83 2.12 3.12 2.58.46.16.94.25 1.42.27zM11 2.5c-.83 0-1.66.07-2.48.21-.06.01-.11.02-.17.03-.09.02-.17.03-.26.04-.63.1-1.25.22-1.87.38-1.74.45-3.07 1.83-3.32 3.51-.11.75-.11 1.51 0 2.25.33 2.15 2.19 3.73 4.39 3.73 2.12 0 3.87-1.63 3.87-3.65 0-2.02-1.65-3.67-3.65-3.67zm.2 1.98c.57 0 1.04.47 1.04 1.04 0 .57-.47 1.04-1.04 1.04s-1.04-.47-1.04-1.04c0-.57.47-1.04 1.04-1.04z"/>
-                        </svg>
-                    </span>
-                    IOS
-                </button>
-                <!-- Tab Blox Fruit Scripts (New Tab) -->
-                <button id="tab-bloxfruit" onclick="switchTab('bloxfruit')"
-                        class="flex-1 min-w-[33%] sm:min-w-0 px-4 py-3 text-lg font-semibold border-b-2 border-transparent text-gray-400 hover:text-accent hover:border-accent transition duration-300 ease-in-out">
-                    <span class="inline-block mr-1 text-xl align-middle">
-                        <!-- Icon Sword/Scripts SVG -->
-                        <svg class="w-6 h-6 inline" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21.5 21.5l-1.42-1.42L22 18.16l2-2v-4.83l-4.59-4.59-5.66 5.66 4.59 4.59 1.29-1.29-1.42-1.42 1.42-1.42 1.42 1.42 1.42-1.42 1.42 1.42-1.42 1.42 1.42 1.42-1.42 1.42 1.42 1.42zM4.77 15.11l-3.38 3.38 1.42 1.42 3.38-3.38zm13.14-7.22l-1.42-1.42-3.38 3.38-1.42-1.42 3.38-3.38 1.42 1.42 1.42-1.42-1.42-1.42 1.42-1.42 1.42 1.42-1.42 1.42 1.42 1.42-1.42 1.42 1.42 1.42z"/>
-                        </svg>
-                    </span>
-                    BLOX FRUIT SCRIPTS
-                </button>
-            </div>
-
-            <!-- Content for Android -->
-            <div id="content-android" class="space-y-8">
-                <!-- Section Delta X -->
-                <div class="bg-secondary-dark p-6 rounded-lg shadow-xl border-t-4 border-android">
-                    <h2 class="text-3xl font-bold mb-6 flex items-center text-android">
-                        <span class="text-3xl mr-3">🥷</span> Delta X
-                    </h2>
-
-                    <!-- Client Item Layout (Optimized for Mobile/Desktop) -->
-                    <!-- Cấu trúc grid 3 cột trên desktop, flex/stack trên mobile -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                        <!-- Client 1: Delta X (Quốc tế) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col justify-between space-y-4 border border-gray-700">
-                            <!-- Info Section -->
-                            <div class="flex flex-col space-y-1">
-                                <p class="text-xl font-bold text-white">Delta X (quốc tế) V2.700</p>
-                                <p class="text-sm text-gray-400">VNG Login.apk</p>
-                            </div>
-                            <!-- Status & Button Section (Vertical on mobile, horizontal on desktop) -->
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center pt-3 border-t border-gray-700">
-                                <span class="text-status-online font-bold text-lg flex items-center mb-3 sm:mb-0">
-                                    <span class="inline-block w-3 h-3 rounded-full bg-status-online mr-2 animate-pulse"></span>
-                                    Status: 🟢
-                                </span>
-                                <a href="https://www.mediafire.com/file/d14lffnv5682vhi/V2.700_Delta_X_VNG_Login.apk/file"
-                                   target="_blank"
-                                   class="download-button bg-android hover:bg-emerald-600 text-primary-dark font-extrabold py-3 px-8 rounded-full text-base tracking-wide text-center">
-                                    TẢI XUỐNG
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Client 2: Delta X (VNG Chính thức) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col justify-between space-y-4 border border-gray-700">
-                            <!-- Info Section -->
-                            <div class="flex flex-col space-y-1">
-                                <p class="text-xl font-bold text-white">Delta X (VNG chính thức không cần file login) V2.700</p>
-                                <p class="text-sm text-gray-400">Delta x VNG V2.700.apk</p>
-                            </div>
-                            <!-- Status & Button Section (Vertical on mobile, horizontal on desktop) -->
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center pt-3 border-t border-gray-700">
-                                <span class="text-status-online font-bold text-lg flex items-center mb-3 sm:mb-0">
-                                    <span class="inline-block w-3 h-3 rounded-full bg-status-online mr-2 animate-pulse"></span>
-                                    Status: 🟢
-                                </span>
-                                <a href="https://www.mediafire.com/file/kjfeo772y07j16n/Delta+x+VNG+V2.700.apk/file"
-                                   target="_blank"
-                                   class="download-button bg-android hover:bg-emerald-600 text-primary-dark font-extrabold py-3 px-8 rounded-full text-base tracking-wide text-center">
-                                    TẢI XUỐNG
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+    <div class="container">
+        <!-- ANDROID Section -->
+        <div class="section">
+            <h2 class="section-title"><img src="https://www.android.com/static/images/android-logo.png" alt="Android" style="height: 50px; margin-right: 15px; vertical-align: middle;"> Android</h2>
+            
+            <div class="apps-grid">
+                <div class="app-card">
+                    <div class="app-name">🥷 Delta X</div>
+                    <div class="app-version">International - V2.702.662</div>
+                    <div class="app-info">Phiên bản Delta X quốc tế mới nhất với hiệu suất tối ưu.</div>
+                    <a href="https://delta.filenetwork.vip/android.html" class="download-btn">Download</a>
                 </div>
 
-                <!-- Section Code X -->
-                <div class="bg-secondary-dark p-6 rounded-lg shadow-xl border-t-4 border-android">
-                    <h2 class="text-3xl font-bold mb-6 flex items-center text-android">
-                        <span class="text-3xl mr-3">⭐</span> Code X
-                    </h2>
-
-                    <!-- Client Item Layout (Optimized for Mobile/Desktop) -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                        <!-- Client 3: Code X (Quốc tế) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col justify-between space-y-4 border border-gray-700">
-                             <!-- Info Section -->
-                            <div class="flex flex-col space-y-1">
-                                <p class="text-xl font-bold text-white">Code X (quốc tế) V2.700</p>
-                                <p class="text-sm text-gray-400">Codex Quốc Tế V2.700.apk</p>
-                            </div>
-                            <!-- Status & Button Section (Vertical on mobile, horizontal on desktop) -->
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center pt-3 border-t border-gray-700">
-                                <span class="text-status-online font-bold text-lg flex items-center mb-3 sm:mb-0">
-                                    <span class="inline-block w-3 h-3 rounded-full bg-status-online mr-2 animate-pulse"></span>
-                                    Status: 🟢
-                                </span>
-                                <a href="https://www.mediafire.com/file/a8oqzba1iaunbxv/Codex+Quốc+Tế+V2.700.apk/file/notes/qhpgqnc9"
-                                   target="_blank"
-                                   class="download-button bg-android hover:bg-emerald-600 text-primary-dark font-extrabold py-3 px-8 rounded-full text-base tracking-wide text-center">
-                                    TẢI XUỐNG
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Client 4: Code X (VNG Chính thức) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col justify-between space-y-4 border border-gray-700">
-                            <!-- Info Section -->
-                            <div class="flex flex-col space-y-1">
-                                <p class="text-xl font-bold text-white">Code X (VNG chính thức) V2.700</p>
-                                <p class="text-sm text-gray-400">Codex x VNG V2.700.apk</p>
-                            </div>
-                            <!-- Status & Button Section (Vertical on mobile, horizontal on desktop) -->
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center pt-3 border-t border-gray-700">
-                                <span class="text-status-online font-bold text-lg flex items-center mb-3 sm:mb-0">
-                                    <span class="inline-block w-3 h-3 rounded-full bg-status-online mr-2 animate-pulse"></span>
-                                    Status: 🟢
-                                </span>
-                                <a href="https://www.mediafire.com/file/wtq7cl2ckj267go/Codex+x+VNG+V2.700.apk/file"
-                                   target="_blank"
-                                   class="download-button bg-android hover:bg-emerald-600 text-primary-dark font-extrabold py-3 px-8 rounded-full text-base tracking-wide text-center">
-                                    TẢI XUỐNG
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Content for IOS (Hidden by default) -->
-            <div id="content-ios" class="space-y-8 hidden">
-                 <!-- Section Skib X -->
-                <div class="bg-secondary-dark p-6 rounded-lg shadow-xl border-t-4 border-ios">
-                    <h2 class="text-3xl font-bold mb-6 flex items-center text-ios">
-                        <span class="text-3xl mr-3">🅺</span> Skib X
-                    </h2>
-
-                    <!-- Client Item Layout (Optimized for Mobile/Desktop) -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <!-- Client 1: Skib X (VNG Chính thức) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col justify-between space-y-4 border border-gray-700">
-                            <!-- Info Section -->
-                            <div class="flex flex-col space-y-1">
-                                <p class="text-xl font-bold text-white">Skib X (VNG chính thức) V2 <span class="text-gray-400 text-base font-normal">(thay thế cho Krnl)</span></p>
-                                <p class="text-sm text-gray-400">HuyMyThic IOS - SkibXVN V2 HuyMythic.ipa</p>
-                            </div>
-                            <!-- Status & Button Section -->
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center pt-3 border-t border-gray-700">
-                                <span class="text-status-online font-bold text-lg flex items-center mb-3 sm:mb-0">
-                                    <span class="inline-block w-3 h-3 rounded-full bg-status-online mr-2 animate-pulse"></span>
-                                    Status: 🟢
-                                </span>
-                                <a href="https://www.mediafire.com/file/txu7cchvlzfp0iv/SkibXVN+V2+HuyMythic.ipa/file"
-                                   target="_blank"
-                                   class="download-button bg-ios hover:bg-indigo-600 text-white font-extrabold py-3 px-8 rounded-full text-base tracking-wide text-center">
-                                    TẢI XUỐNG
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="app-card">
+                    <div class="app-name">🥷 Delta X</div>
+                    <div class="app-version">VNG Official - V2.702.632</div>
+                    <div class="app-info">Phiên bản chính thức VNG không cần file login, dễ sử dụng.</div>
+                    <a href="https://www.mediafire.com/file/0c19asxqi360r10/Delta_Vng_V2.702.632_Up.apk/file" class="download-btn">Download</a>
                 </div>
 
-                <!-- Section Delta X -->
-                <div class="bg-secondary-dark p-6 rounded-lg shadow-xl border-t-4 border-ios">
-                    <h2 class="text-3xl font-bold mb-6 flex items-center text-ios">
-                        <span class="text-3xl mr-3">🥷</span> Delta X
-                    </h2>
-
-                    <!-- Client Item Layout (Optimized for Mobile/Desktop) -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <!-- Client 2: Delta X (VNG Chính thức) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col justify-between space-y-4 border border-gray-700">
-                            <!-- Info Section -->
-                            <div class="flex flex-col space-y-1">
-                                <p class="text-xl font-bold text-white">Delta X (VNG chính thức không cần file login) V43</p>
-                                <p class="text-sm text-gray-400">HuyMyThic IOS - DeltaVN V43 HuyMythic AntiBan.ipa</p>
-                            </div>
-                            <!-- Status & Button Section -->
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center pt-3 border-t border-gray-700">
-                                <span class="text-status-online font-bold text-lg flex items-center mb-3 sm:mb-0">
-                                    <span class="inline-block w-3 h-3 rounded-full bg-status-online mr-2 animate-pulse"></span>
-                                    Status: 🟢
-                                </span>
-                                <a href="https://www.mediafire.com/file/07torbga2ht6tuk/DeltaVN+V43+HuyMythic+AntiBan.ipa/file"
-                                   target="_blank"
-                                   class="download-button bg-ios hover:bg-indigo-600 text-white font-extrabold py-3 px-8 rounded-full text-base tracking-wide text-center">
-                                    TẢI XUỐNG
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="app-card">
+                    <div class="app-name">Fluxus Z</div>
+                    <div class="app-version">International - V3.0.6</div>
+                    <div class="app-info">Phiên bản Fluxus Z quốc tế với tính năng mới.</div>
+                    <a href="https://www.mediafire.com/file/7iizmrzio32qsve/FluxusZ+V3.0.6+ARM64.apk/file" class="download-btn">Download</a>
                 </div>
 
-            </div>
-
-            <!-- Content for Blox Fruit Scripts (New Content) -->
-            <div id="content-bloxfruit" class="space-y-8 hidden">
-                <div class="bg-secondary-dark p-6 rounded-lg shadow-xl border-t-4 border-accent">
-                    <h2 class="text-3xl font-bold mb-6 flex items-center text-accent">
-                        <span class="text-3xl mr-3">⚔️</span> Blox Fruit Scripts (Code Luau/Lua)
-                    </h2>
-                    <p class="text-gray-400 mb-6">Nhấn vào nút "Copy" để sao chép toàn bộ mã script vào clipboard. Luôn đọc kỹ mô tả trước khi sử dụng.</p>
-
-                    <!-- Script Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                        <!-- Script Item 1: REDZ (New) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">1. REDZ: Auto Farm, V4 Draco, ...</p>
-                            <div class="text-sm text-gray-400">Yêu cầu: Không yêu cầu Key.</div>
-                            <div class="relative">
-                                <textarea id="script-1" rows="4" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >local Settings = {
-    JoinTeam = "Pirates", -- Pirates / Marines
-    Translator = true     -- true / false
-}
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/heads/main/main.luau"))(Settings)</textarea>
-                                <button onclick="copyScript('script-1')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 2: Hiru Hub – NO KEY (1) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">2. Hiru Hub – NO KEY</p>
-                            <div class="text-sm text-gray-400">Tùy chọn: Auto Join Team.</div>
-                            <div class="relative">
-                                <textarea id="script-2" rows="5" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >getgenv().Settings = {
-    JoinTeam = true,
-    Team = "Marines"
-}
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/kiddohiru/Source/main/BloxFruits.lua"))()</textarea>
-                                <button onclick="copyScript('script-2')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 3: Xeter Hub V3 -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">3. Xeter Hub V3</p>
-                            <div class="text-sm text-gray-400">Tùy chọn: Đặt Team và Version.</div>
-                            <div class="relative">
-                                <textarea id="script-3" rows="5" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >getgenv().Version = "V3"
-getgenv().Team = "Marines"
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/TlDinhKhoi/Xeter/refs/heads/main/Main.lua"))()</textarea>
-                                <button onclick="copyScript('script-3')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 4: Soul Hub -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">4. Soul Hub</p>
-                            <div class="relative">
-                                <textarea id="script-4" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/GoblinKun009/Script/refs/heads/main/soulhub", true))()</textarea>
-                                <button onclick="copyScript('script-4')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 5: Quantum Hub – NO KEY (1) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">5. Quantum Hub – NO KEY (1)</p>
-                            <div class="relative">
-                                <textarea id="script-5" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"))()</textarea>
-                                <button onclick="copyScript('script-5')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 6: TxZ Hub -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">6. TxZ Hub: Auto Farm, Sea Event, Race V4, ...</p>
-                            <div class="relative">
-                                <textarea id="script-6" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/DrTxZ/Mercure-Hub/refs/heads/main/Mercure%20Hub.lua"))()</textarea>
-                                <button onclick="copyScript('script-6')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 7: Blue X Hub – NO KEY (Find Fruits) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">7. Blue X Hub – NO KEY (Find Fruits)</p>
-                            <div class="relative">
-                                <textarea id="script-7" rows="7" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >getgenv().Config = {
-    ["Misc"] = {
-        ["RandomFruits"] = true,
-        ["BlackScreen"] = false,
-    }
-}
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/FindFruits.lua"))()</textarea>
-                                <button onclick="copyScript('script-7')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 8: Zinner Hub – NO KEY (1) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">8. Zinner Hub – NO KEY (1): Auto Farm, Sea Event, Raid, ...</p>
-                            <div class="relative">
-                                <textarea id="script-8" rows="4" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >getgenv().Team = "Pirates"
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/HoangNguyenk8/Roblox/refs/heads/main/BF-Main.luau"))()</textarea>
-                                <button onclick="copyScript('script-8')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 9: Omg Hub -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">9. Omg Hub: Auto Farm, Rain Fruit, Sea Event, ...</p>
-                            <div class="relative">
-                                <textarea id="script-9" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua"))()</textarea>
-                                <button onclick="copyScript('script-9')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 10: Banana Hub – NO KEY (1) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">10. Banana Hub – NO KEY (1): Auto Farm, Sea Event, volcano, ...</p>
-                            <div class="relative">
-                                <textarea id="script-10" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/Chiriku2013/BananaCatHub/refs/heads/main/BananaCatHub.lua"))()</textarea>
-                                <button onclick="copyScript('script-10')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 11: Madox Hub -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">11. Madox Hub: Auto Farm, ...</p>
-                            <div class="relative">
-                                <textarea id="script-11" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/GoblinKun009/Script/refs/heads/main/MadoxMain", true))()</textarea>
-                                <button onclick="copyScript('script-11')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 12: StarryMoon Hub – NO KEY -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">12. StarryMoon Hub – NO KEY: Auto Farm, V4 Draco, ...</p>
-                            <div class="relative">
-                                <textarea id="script-12" rows="6" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >repeat task.wait() until game:IsLoaded()
-repeat task.wait() until game.Players
-repeat task.wait() until game.Players.LocalPlayer
-
-getgenv().Team = "Marines" -- Can change Marines => Pirates
-
-loadstring(game:HttpGet("https://power-clock-api.vercel.app/api/clockbloxfruits", true))()</textarea>
-                                <button onclick="copyScript('script-12')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 13: SYN Hub -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">13. SYN Hub: Update gravity Auto Farm, Sea Event, Volcano, ...</p>
-                            <div class="relative">
-                                <textarea id="script-13" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/GoblinKun009/Script/refs/heads/main/ZynHub", true))()</textarea>
-                                <button onclick="copyScript('script-13')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 14: Shinichi Hub – NO KEY -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">14. Shinichi Hub – NO KEY</p>
-                            <div class="relative">
-                                <textarea id="script-14" rows="4" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >repeat wait() until game:IsLoaded()
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/ShinichiHub.lua"))()</textarea>
-                                <button onclick="copyScript('script-14')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 15: Arceney Hub – NO KEY -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">15. Arceney Hub – NO KEY: Auto Farm, Sea Event, ...</p>
-                            <div class="relative">
-                                <textarea id="script-15" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game.HttpGet(game, 'https://raw.githubusercontent.com/Yumiara/Python/refs/heads/main/BloxFruit-XYZ.lua'))()</textarea>
-                                <button onclick="copyScript('script-15')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 16: Aurora Hub -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">16. Aurora Hub: Auto Farm, Rain Fruit, Raid, ...</p>
-                            <div class="relative">
-                                <textarea id="script-16" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/Jadelly261/BloxFruits/main/Aurora", true))()</textarea>
-                                <button onclick="copyScript('script-16')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 17: Yuri Hub – NO KEY -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">17. Yuri Hub – NO KEY: Update Gravity Auto Farm, Sea Event, Gun Mastery, ...</p>
-                            <div class="relative">
-                                <textarea id="script-17" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/Jadelly261/BloxFruits/main/YuriMain", true))()</textarea>
-                                <button onclick="copyScript('script-17')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 18: Volcano Hub V3 – NO KEY (1) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">18. Volcano Hub V3 – NO KEY: Auto Farm, Raid, Mastery, ...</p>
-                            <div class="relative">
-                                <textarea id="script-18" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/indexeduu/BF-NewVer/refs/heads/main/V3New.lua"))()</textarea>
-                                <button onclick="copyScript('script-18')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 19: Solix Hub -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">19. Solix Hub</p>
-                            <div class="relative">
-                                <textarea id="script-19" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/debunked69/solixloader/refs/heads/main/solix%20v2%20new%20loader.lua"))()</textarea>
-                                <button onclick="copyScript('script-19')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Script Item 20: Vxeze Hub – NO KEY (1) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">20. Vxeze Hub – NO KEY (1): Auto Farm, Raid, Gun Mastery, Kill Tyrant Boss, ...</p>
-                            <div class="relative">
-                                <textarea id="script-20" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/Dex-Bear/Vxezehub/refs/heads/main/VxezeHubMain"))()</textarea>
-                                <button onclick="copyScript('script-20')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 21: Muxus Hub – NO KEY -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">21. Muxus Hub – NO KEY: Auto Farm, Volcano Event, ...</p>
-                            <div class="relative">
-                                <textarea id="script-21" rows="4" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >getgenv().Team = "Pirates"
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MuxusTL/BloxFruits/main/MuxusHub.lua"))()</textarea>
-                                <button onclick="copyScript('script-21')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 22: Maru Hub (NO KEY) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">22. Maru Hub (NO KEY): Auto Farm, Raid, Rain Fruit, ...</p>
-                            <div class="relative">
-                                <textarea id="script-22" rows="4" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >getgenv().Team = "Marines"
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaCrack/KimP/refs/heads/main/MaruHub"))()</textarea>
-                                <button onclick="copyScript('script-22')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 23: HOHO V4 -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">23. HOHO V4: Auto Farm, Sea Event, ...</p>
-                            <div class="relative">
-                                <textarea id="script-23" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()</textarea>
-                                <button onclick="copyScript('script-23')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 24: Shark X Hub – NO KEY -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">24. Shark X Hub – NO KEY: Auto Farm, Raid, ...</p>
-                            <div class="relative">
-                                <textarea id="script-24" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://shorturl.at/kyOxL"))()</textarea>
-                                <button onclick="copyScript('script-24')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 25: Quartz Kaitun Hub – NO KEY -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">25. Quartz Kaitun Hub – NO KEY: Auto Kaitun, Farm, ...</p>
-                            <div class="relative">
-                                <textarea id="script-25" rows="12" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >getgenv().Mode = "OneClick"
-
-getgenv().Setting = {
-    ["Team"] = "Pirates", -- "Pirates", "Marines"
-    ["FucusOnLevel"] = true,
-    ["Fruits"] = {
-        ["Primary"] = {
-            "Dough-Dough",
-            "Dragon-Dragon",
-            "Buddha-Buddha",
-        },
-        ["Normal"] = {
-            "Flame-Flame",
-            "Light-Light",
-            "Magma-Magma",
-        }
-    },
-    ["IdleCheck"] = 150, -- seconds
-}
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/xQuartyx/QuartyzScript/main/Loader.lua"))()</textarea>
-                                <button onclick="copyScript('script-25')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 26: Lion Hub – NO KEY (1) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">26. Lion Hub – NO KEY (1): Auto Farm, Sea Event, V4 Draco, ...</p>
-                            <div class="relative">
-                                <textarea id="script-26" rows="5" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-
-getgenv().team = "Pirates" -- Marines
-
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e0c7fcf6c077fc23475cf4ce4db58e42.lua"))()</textarea>
-                                <button onclick="copyScript('script-26')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 27: Hiru Hub (2) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">27. Hiru Hub (2): Auto Farm, Sea Event, Raid, ...</p>
-                            <div class="relative">
-                                <textarea id="script-27" rows="4" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >getgenv().Team = "Pirates"
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NGUYENVUDUY1/Source/main/HiruHub.lua"))()</textarea>
-                                <button onclick="copyScript('script-27')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 28: Banana Hub – NO KEY (2) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">28. Banana Hub – NO KEY (2): Auto Farm, Raid, Sea Event</p>
-                            <div class="relative">
-                                <textarea id="script-28" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/kimprobloxdz/Banana-Free/refs/heads/main/Protected_5609200582002947.lua.txt"))()</textarea>
-                                <button onclick="copyScript('script-28')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 29: REDZ (newredz) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">29. REDZ (newredz): Auto Farm, V4 Draco, ...</p>
-                            <div class="relative">
-                                <textarea id="script-29" rows="8" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >local Settings = {
-    JoinTeam = "Pirates", -- Pirates/Marines
-    Translator = true     -- true/false
-}
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/newredz/BloxFruits/refs/heads/main/Source.luau"))(Settings)
-
--- Alternative Redz
-loadstring(game:HttpGet("https://pastefy.app/ACOX6D6h/raw"))()</textarea>
-                                <button onclick="copyScript('script-29')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 30: TSUO BETA – NO KEY -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">30. TSUO BETA – NO KEY: Auto Farm, Sea Event, RACE V4 PVP, ...</p>
-                            <div class="relative">
-                                <textarea id="script-30" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/Tsuo7/TsuoHub/main/Tsuoscripts"))()</textarea>
-                                <button onclick="copyScript('script-30')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 31: Zinner Hub – NO KEY (2) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">31. Zinner Hub – NO KEY (2): Auto Farm, Sea Event, ...</p>
-                            <div class="relative">
-                                <textarea id="script-31" rows="4" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >getgenv().Team = "Pirates"
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/HoangNguyenk8/Scripts/refs/heads/main/Loader.lua"))()</textarea>
-                                <button onclick="copyScript('script-31')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 32: Blue X – NO KEY (2) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">32. Blue X – NO KEY (2): Auto Farm, Sea Event, Magnet, ...</p>
-                            <div class="relative">
-                                <textarea id="script-32" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua"))()</textarea>
-                                <button onclick="copyScript('script-32')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 33: Vxeze Hub – NO KEY (2) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">33. Vxeze Hub – NO KEY (2): Auto Farm, Gun Mastery, Raid, Volcano Event, ...</p>
-                            <div class="relative">
-                                <textarea id="script-33" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/Dex-Bear/Vxezehub/refs/heads/main/Skidlamcho.txt"))()</textarea>
-                                <button onclick="copyScript('script-33')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 34: The BillDev Hub -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">34. The BillDev Hub: Auto Farm, Mastery, ...</p>
-                            <div class="relative">
-                                <textarea id="script-34" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/selciawashere/screepts/refs/heads/main/BFKEYSYS", true))()</textarea>
-                                <button onclick="copyScript('script-34')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 35: Frostware Chest Hub – NO KEY -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">35. Frostware Chest Hub – NO KEY: Auto Farm Chest, Beli, ...</p>
-                            <div class="relative">
-                                <textarea id="script-35" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://frostware.onrender.com/fwchest"))()</textarea>
-                                <button onclick="copyScript('script-35')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 36: Frostware Hub – NO KEY (Full) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">36. Frostware Hub – NO KEY (Full Features)</p>
-                            <div class="relative">
-                                <textarea id="script-36" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://frostware.onrender.com/fw"))()</textarea>
-                                <button onclick="copyScript('script-36')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 37: FORGE -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">37. FORGE: Auto Farm, Level, Fast Attack, ...</p>
-                            <div class="relative">
-                                <textarea id="script-37" rows="3" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >-- FORGE
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Skzuppy/forge-hub/main/loader.lua"))()</textarea>
-                                <button onclick="copyScript('script-37')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 38: Lion – NO KEY (2) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">38. Lion – NO KEY (2): Auto Farm, Rain Fruit, ...</p>
-                            <div class="relative">
-                                <textarea id="script-38" rows="5" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >-- LION
-getgenv().Team = "Pirates"
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NHMdz/BloxFruit/refs/heads/main/Lion%20Hub.lua"))()</textarea>
-                                <button onclick="copyScript('script-38')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 39: Volcano – NO KEY (2) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">39. Volcano – NO KEY (2): Auto Farm, Fruit Mastery, ...</p>
-                            <div class="relative">
-                                <textarea id="script-39" rows="3" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >-- VOLCANO
-loadstring(game:HttpGet("https://raw.githubusercontent.com/wpisstestfprg/Volcano/refs/heads/main/VolcanoNewUpdated.luau"))()</textarea>
-                                <button onclick="copyScript('script-39')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 40: HIRU – NO KEY (3) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">40. HIRU – NO KEY (3): Auto Farm, Rain Fruit, ...</p>
-                            <div class="relative">
-                                <textarea id="script-40" rows="3" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >-- HIRU
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NGUYENVUDUY1/Dev-Hiru/refs/heads/main/HiruHub.lua"))()</textarea>
-                                <button onclick="copyScript('script-40')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 41: QUANTUM – NO KEY (2) -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">41. QUANTUM – NO KEY (2): Update Valentine Auto Farm Hearts, Fast Attack, ...</p>
-                            <div class="relative">
-                                <textarea id="script-41" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/Trustmenotcondom/QTONYX/refs/heads/main/QuantumOnyx.lua"))()</textarea>
-                                <button onclick="copyScript('script-41')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 42: KNCRYPT – NO KEY -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">42. KNCRYPT – NO KEY: Auto Farm, gun & DF Mastery, Auto Sea event, ...</p>
-                            <div class="relative">
-                                <textarea id="script-42" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/Kncrypt/refs/heads/main/sources/BloxFruit.lua"))()</textarea>
-                                <button onclick="copyScript('script-42')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 43: Xero – NO KEY -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">43. Xero – NO KEY: Auto Farm, Raid, Dojo Quest, ...</p>
-                            <div class="relative">
-                                <textarea id="script-43" rows="6" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >getgenv().Team = "Marines"
-getgenv().Hide_Menu = false
-getgenv().Auto_Execute = false
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs/heads/main/main.lua"))()</textarea>
-                                <button onclick="copyScript('script-43')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Script Item 44: Ganteng – NO KEY -->
-                        <div class="p-5 bg-gray-800 rounded-lg flex flex-col space-y-3 border border-gray-700">
-                            <p class="text-xl font-bold text-accent">44. Ganteng – NO KEY: Auto Farm, Raid, Berries, ...</p>
-                            <div class="relative">
-                                <textarea id="script-44" rows="2" readonly
-                                    class="w-full p-3 bg-gray-900 text-sm font-mono text-green-300 rounded-md resize-none border border-gray-700 focus:ring-2 focus:ring-accent outline-none"
-                                >loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/a5c3af437cd698d64379cf75cacb9281.lua"))()</textarea>
-                                <button onclick="copyScript('script-44')"
-                                    class="absolute top-2 right-2 bg-gray-700 hover:bg-accent text-white p-2 rounded-lg text-xs font-semibold transition duration-200">
-                                    Copy
-                                </button>
-                            </div>
-                        </div>
-                        
-                    </div>
+                <div class="app-card">
+                    <div class="app-name">Fluxus Z</div>
+                    <div class="app-version">VNG Official - V3.0.6</div>
+                    <div class="app-info">Fluxus Z chính thức từ VNG, ổn định và đáng tin cậy.</div>
+                    <a href="https://www.mediafire.com/file/v2iuh5a7klnu84j/FluxusZ+V3.0.6+VNG+ARM64.apk/file" class="download-btn">Download</a>
                 </div>
             </div>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="mt-12 text-center text-gray-500 text-sm">
-        <p>&copy; 2025 DRGteam Mode. Bản quyền thuộc HieuDRG.</p>
-    </footer>
-
-    <!-- JavaScript để xử lý chuyển đổi tab và Copy Script -->
-    <script>
-        const TABS = ['android', 'ios', 'bloxfruit'];
-        const PLATFORM_COLORS = {
-            'android': 'android',
-            'ios': 'ios',
-            'bloxfruit': 'accent'
-        };
-
-        function switchTab(platform) {
-            TABS.forEach(tab => {
-                const content = document.getElementById(`content-${tab}`);
-                const button = document.getElementById(`tab-${tab}`);
-                const isActive = tab === platform;
-
-                if (content) content.classList.toggle('hidden', !isActive);
-
-                if (button) {
-                    // Remove previous active styles
-                    button.classList.remove('border-android', 'text-android', 'border-ios', 'text-ios', 'border-accent', 'text-accent');
-                    button.classList.add('border-transparent', 'text-gray-400');
-
-                    // Apply active styles based on platform color
-                    if (isActive) {
-                        const colorClass = PLATFORM_COLORS[platform];
-                        button.classList.remove('border-transparent', 'text-gray-400', `hover:text-${colorClass}`, `hover:border-${colorClass}`);
-                        button.classList.add(`border-${colorClass}`, `text-${colorClass}`);
-                    } else {
-                        // Ensure hover state for non-active tabs
-                         const colorClass = PLATFORM_COLORS[tab];
-                         button.classList.add(`hover:text-${colorClass}`, `hover:border-${colorClass}`);
-                    }
-                }
-            });
-        }
-        
-        function copyScript(id) {
-            const textarea = document.getElementById(id);
-            // Select the content
-            textarea.select();
-            textarea.setSelectionRange(0, 99999); // For mobile devices
+        <!-- IOS Section -->
+        <div class="section">
+            <h2 class="section-title"><img src="https://www.apple.com/ac/structured-data/images/open_graph_logo.png" alt="Apple" style="height: 50px; margin-right: 15px; vertical-align: middle;"> iOS</h2>
             
-            try {
-                // Use execCommand('copy') for better iframe compatibility
-                const successful = document.execCommand('copy');
-                const msg = successful ? 'Copied!' : 'Copy failed.';
-                
-                // Simple visual feedback
-                const button = textarea.parentElement.querySelector('button');
-                const originalText = button.textContent;
-                button.textContent = msg;
-                button.classList.remove('bg-gray-700', 'hover:bg-accent');
-                button.classList.add('bg-green-600', 'hover:bg-green-700');
+            <div class="apps-grid">
+                <div class="app-card">
+                    <div class="app-name">🅺 Skib X</div>
+                    <div class="app-version">VNG Super Fix Lag - V698</div>
+                    <div class="app-info">Skib X phiên bản siêu fix lag, thay thế cho Krnl. By NgocBongGaming</div>
+                    <a href="https://www.mediafire.com/file/5j6uusfyy6fkw4f/SkibxVN+Fixlag_2.698.937_1763996205.ipa/file" class="download-btn">Download</a>
+                </div>
 
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.classList.remove('bg-green-600', 'hover:bg-green-700');
-                    button.classList.add('bg-gray-700', 'hover:bg-accent');
-                }, 1500);
+                <div class="app-card">
+                    <div class="app-name">🥷 Delta X</div>
+                    <div class="app-version">VNG Official - V702</div>
+                    <div class="app-info">Delta X phiên bản VNG chính thức cho iOS. By NgocBongGaming</div>
+                    <a href="https://www.mediafire.com/file/sxfb8qi4u2xqkci/DeltaVN+New_2.702.613_1765538756.ipa/file" class="download-btn">Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            } catch (err) {
-                console.error('Fallback: Oops, unable to copy', err);
-            }
-        }
-
-        // Mặc định chọn tab Android khi tải trang
-        document.addEventListener('DOMContentLoaded', () => {
-             switchTab('android');
-        });
-
-    </script>
+    <footer>
+        <p>DRGTeam © 2024 - All Rights Reserved by HieuDRG</p>
+        <p style="margin-top: 10px; font-size: 0.85em;">Download the latest versions securely from here.</p>
+    </footer>
 </body>
 </html>
