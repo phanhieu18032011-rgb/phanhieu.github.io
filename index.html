@@ -263,6 +263,13 @@
             font-weight: bold;
         }
 
+        .modal-subtitle {
+            font-size: 1.3em;
+            color: #ffbe0b;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
         .modal-message {
             font-size: 1.1em;
             color: #ddd;
@@ -603,8 +610,9 @@
     <div id="downModal" class="modal">
         <div class="modal-content">
             <div class="modal-title">⚠️ Client Không Hoạt Động</div>
+            <div class="modal-subtitle" id="clientName"></div>
             <div class="modal-message">
-                <strong id="clientName"></strong> Đã Không Còn Hoạt Động An Toàn<br><br>
+                Client Này Đã Không Còn Hoạt Động An Toàn<br><br>
                 Bạn Có Thể Thử Tải Bản Khác
             </div>
             <button class="modal-btn" onclick="closeModal()">Quay Lại Trang Chủ</button>
