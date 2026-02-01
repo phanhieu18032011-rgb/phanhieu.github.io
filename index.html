@@ -361,6 +361,10 @@
                     })
                 });
 
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
                 const data = await response.json();
 
                 if (data.success) {
@@ -373,6 +377,7 @@
                 }
             } catch (error) {
                 showStatus('Lỗi: ' + error.message, 'error');
+                console.error('Full error:', error);
             }
         });
 
