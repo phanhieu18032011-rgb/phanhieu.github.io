@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRGTeam - Official Downloads</title>
+    <title>Raw Link Generator - Tạo Link Raw</title>
     <style>
         * {
             margin: 0;
@@ -13,663 +13,442 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        header {
-            background: rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             padding: 20px;
-            text-align: center;
-            border-bottom: 3px solid #ff006e;
-            position: relative;
-        }
-
-        header h1 {
-            font-size: 3em;
-            background: linear-gradient(45deg, #ff006e, #fb5607, #ffbe0b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: slideInDown 0.8s ease-out;
-        }
-
-        .copyright {
-            font-size: 0.9em;
-            color: #aaa;
-            margin-top: 10px;
-            animation: fadeIn 1.2s ease-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .section {
-            margin-bottom: 50px;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .section-title {
-            font-size: 2.5em;
-            color: #ffbe0b;
-            margin-bottom: 30px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
             width: 100%;
+            padding: 40px;
         }
 
-        .section-title img {
-            filter: brightness(1.1);
-            transition: transform 0.3s ease;
-        }
-
-        .section-title:hover img {
-            transform: scale(1.1);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, #ff006e, #ffbe0b);
-            animation: expandWidth 0.8s ease-out;
-        }
-
-        /* DESKTOP LAYOUT */
-        .apps-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .app-card {
-            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(251, 86, 7, 0.1) 100%);
-            border: 2px solid #ff006e;
-            border-radius: 15px;
-            padding: 25px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            animation: popIn 0.6s ease-out backwards;
-            position: relative;
-            overflow: hidden;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .app-card:nth-child(1) { animation-delay: 0.1s; }
-        .app-card:nth-child(2) { animation-delay: 0.2s; }
-        .app-card:nth-child(3) { animation-delay: 0.3s; }
-        .app-card:nth-child(4) { animation-delay: 0.4s; }
-        .app-card:nth-child(5) { animation-delay: 0.5s; }
-        .app-card:nth-child(6) { animation-delay: 0.6s; }
-
-        .app-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .app-card:hover::before {
-            left: 100%;
-        }
-
-        .app-card:hover {
-            transform: translateY(-10px);
-            border-color: #ffbe0b;
-            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.5);
-            background: linear-gradient(135deg, rgba(255, 0, 110, 0.2) 0%, rgba(251, 86, 7, 0.2) 100%);
-        }
-
-        .app-name {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #ffbe0b;
+        h1 {
+            color: #333;
             margin-bottom: 10px;
-            display: flex;
-            align-items: center;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        textarea, input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus, input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
 
-        .app-version {
-            color: #aaa;
-            font-size: 0.9em;
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 10px 25px rgba(108, 117, 125, 0.3);
+        }
+
+        .result-section {
+            display: none;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .result-section.show {
+            display: block;
+        }
+
+        .result-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
             margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 190, 11, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-label {
+            color: #666;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            color: #333;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: #28a745;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        .copy-btn:hover {
+            background: #218838;
         }
 
         .status {
-            font-size: 1em;
-            font-weight: bold;
-            padding: 4px 12px;
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .status.online {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22c55e;
-            border: 1px solid #22c55e;
-        }
-
-        .status.down {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-            border: 1px solid #ef4444;
-        }
-
-        .app-info {
-            color: #ddd;
-            font-size: 0.95em;
-            margin-bottom: 20px;
-            line-height: 1.6;
-            flex-grow: 1;
-        }
-
-        .download-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff006e, #fb5607);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.4);
-        }
-
-        .download-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(255, 0, 110, 0.6);
-            background: linear-gradient(135deg, #fb5607, #ffbe0b);
-        }
-
-        .download-btn:active {
-            transform: scale(0.98);
-        }
-
-        .download-btn.disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        .download-btn.disabled:hover {
-            transform: scale(1);
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .modal.show {
-            display: flex;
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 3px solid #ff006e;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 500px;
-            text-align: center;
-            animation: popIn 0.4s ease-out;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-        }
-
-        .modal-title {
-            font-size: 1.8em;
-            color: #ef4444;
+            padding: 12px;
+            border-radius: 6px;
             margin-bottom: 15px;
-            font-weight: bold;
+            display: none;
         }
 
-        .modal-subtitle {
-            font-size: 1.3em;
-            color: #ffbe0b;
-            margin-bottom: 20px;
-            font-weight: bold;
+        .status.show {
+            display: block;
         }
 
-        .modal-message {
-            font-size: 1.1em;
-            color: #ddd;
-            line-height: 1.8;
-            margin-bottom: 30px;
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
         }
 
-        .modal-message strong {
-            color: #ffbe0b;
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
 
-        .modal-btn {
-            background: linear-gradient(135deg, #ff006e, #fb5607);
-            color: white;
-            padding: 12px 40px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            font-size: 1em;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.4);
+        .status.loading {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
         }
 
-        .modal-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(255, 0, 110, 0.6);
-            background: linear-gradient(135deg, #fb5607, #ffbe0b);
+        .links-list {
+            margin-top: 20px;
         }
 
-        @media (max-width: 768px) {
-            .modal-content {
-                padding: 30px 20px;
-                margin: 20px;
-                max-width: 90%;
-            }
-
-            .modal-title {
-                font-size: 1.5em;
-            }
-
-            .modal-message {
-                font-size: 1em;
-            }
+        .link-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid #667eea;
         }
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.3);
-            border-top: 3px solid #ff006e;
-            margin-top: 50px;
-            color: #aaa;
-            animation: slideInUp 0.8s ease-out;
+        .link-info {
+            flex: 1;
         }
 
-        @keyframes slideInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .link-url {
+            color: #667eea;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            font-size: 13px;
         }
 
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .link-time {
+            color: #999;
+            font-size: 12px;
+            margin-top: 5px;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .link-actions {
+            display: flex;
+            gap: 8px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .link-actions button {
+            width: auto;
+            padding: 6px 12px;
+            font-size: 12px;
         }
 
-        @keyframes popIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes expandWidth {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100px;
-            }
-        }
-
-        /* TABLET */
-        @media (max-width: 1024px) {
-            .apps-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* MOBILE */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.2em;
-            }
-
-            .copyright {
-                font-size: 0.8em;
-            }
-
-            .container {
-                padding: 20px 15px;
-            }
-
-            .section {
-                margin-bottom: 40px;
-            }
-
-            .section-title {
-                font-size: 1.8em;
-                margin-bottom: 20px;
-                letter-spacing: 1px;
-            }
-
-            .section-title::after {
-                width: 80px;
-            }
-
-            /* MOBILE GRID - 1 COLUMN */
-            .apps-grid {
-                display: grid;
+        @media (max-width: 600px) {
+            .form-row {
                 grid-template-columns: 1fr;
-                gap: 15px;
-                margin-top: 20px;
             }
 
-            .app-card {
-                padding: 20px;
-                border-radius: 12px;
-                animation: slideInUp 0.5s ease-out backwards;
-            }
-
-            .app-card:nth-child(1) { animation-delay: 0.05s; }
-            .app-card:nth-child(2) { animation-delay: 0.1s; }
-            .app-card:nth-child(3) { animation-delay: 0.15s; }
-            .app-card:nth-child(4) { animation-delay: 0.2s; }
-            .app-card:nth-child(5) { animation-delay: 0.25s; }
-            .app-card:nth-child(6) { animation-delay: 0.3s; }
-
-            .app-card:hover {
-                transform: translateY(-5px);
-            }
-
-            .app-name {
-                font-size: 1.3em;
-                margin-bottom: 8px;
-            }
-
-            .app-version {
-                font-size: 0.85em;
-                margin-bottom: 12px;
-                padding-bottom: 8px;
-            }
-
-            .app-info {
-                font-size: 0.9em;
-                margin-bottom: 15px;
-            }
-
-            .download-btn {
-                padding: 11px 25px;
-                font-size: 0.95em;
-                border-radius: 20px;
-            }
-
-            footer {
-                padding: 20px;
-            }
-
-            footer p {
-                font-size: 0.9em;
-            }
-        }
-
-        /* SMALL MOBILE */
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.8em;
+            .button-group {
+                grid-template-columns: 1fr;
             }
 
             .container {
-                padding: 15px 12px;
+                padding: 20px;
             }
 
-            .section-title {
-                font-size: 1.4em;
-                margin-bottom: 15px;
-            }
-
-            .apps-grid {
-                gap: 12px;
-            }
-
-            .app-card {
-                padding: 15px;
-            }
-
-            .app-name {
-                font-size: 1.1em;
-            }
-
-            .app-version {
-                font-size: 0.8em;
-            }
-
-            .app-info {
-                font-size: 0.85em;
-                margin-bottom: 12px;
-            }
-
-            .download-btn {
-                padding: 10px 20px;
-                font-size: 0.9em;
+            h1 {
+                font-size: 22px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>DRGTeam</h1>
-        <div class="copyright">© Copyright HieuDRG</div>
-        <div style="margin-top: 15px;">
-            <audio id="bgMusic" style="width: 200px;" controls>
-                <source src="https://www.youtube.com/watch?v=1DHtFR_Emcs" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-    </header>
-
     <div class="container">
-        <!-- ANDROID Section -->
-        <div class="section">
-            <h2 class="section-title"><img src="https://images.vexels.com/media/users/3/139556/isolated/preview/1718a076e29822051df8bcf8b5ce1124-android-logo.png" alt="Android" style="height: 50px; margin-right: 15px; vertical-align: middle;"> Android</h2>
-            
-            <div class="apps-grid">
-                <div class="app-card">
-                    <div class="app-name"><img src="https://s3-eu-west-1.amazonaws.com/tpd/logos/6547387064519ebed7df6a08/0x0.png" alt="Delta X" style="height: 30px; margin-right: 10px; vertical-align: middle;"> Delta X</div>
-                    <div class="app-version">
-                        <span>International - V2.702.662</span>
-                        <span class="status down">🔴 Down</span>
-                    </div>
-                    <div class="app-info">Phiên bản Delta X quốc tế mới nhất với hiệu suất tối ưu.</div>
-                    <a href="#" class="download-btn disabled">Download</a>
+        <h1>🔗 Raw Link Generator</h1>
+        <p class="subtitle">Tạo link raw tự động với cấu trúc domain/apikey/v1/random</p>
+
+        <div id="status" class="status"></div>
+
+        <form id="linkForm">
+            <div class="form-group">
+                <label for="content">Nội dung (Content) *</label>
+                <textarea id="content" name="content" placeholder="Nhập nội dung bạn muốn chia sẻ qua link raw..." required></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="contentType">Loại nội dung (Content Type)</label>
+                    <select id="contentType" name="contentType">
+                        <option value="text/plain">Text Plain</option>
+                        <option value="text/html">HTML</option>
+                        <option value="application/json">JSON</option>
+                        <option value="application/xml">XML</option>
+                        <option value="text/css">CSS</option>
+                        <option value="text/javascript">JavaScript</option>
+                        <option value="text/markdown">Markdown</option>
+                    </select>
                 </div>
 
-                <div class="app-card">
-                    <div class="app-name"><img src="https://s3-eu-west-1.amazonaws.com/tpd/logos/6547387064519ebed7df6a08/0x0.png" alt="Delta X" style="height: 30px; margin-right: 10px; vertical-align: middle;"> Delta X</div>
-                    <div class="app-version">
-                        <span>VNG Official - V2.702.632</span>
-                        <span class="status online">🟢 Online</span>
-                    </div>
-                    <div class="app-info">Phiên bản chính thức VNG không cần file login, dễ sử dụng.</div>
-                    <a href="https://www.mediafire.com/file/0c19asxqi360r10/Delta_Vng_V2.702.632_Up.apk/file" class="download-btn">Download</a>
+                <div class="form-group">
+                    <label for="apiKey">API Key (tùy chọn)</label>
+                    <input type="text" id="apiKey" name="apiKey" placeholder="Để trống để tạo tự động">
                 </div>
+            </div>
 
-                <div class="app-card">
-                    <div class="app-name"><img src="https://wearedevs.net/images/thumbnails/fluxus-z-111125.webp" alt="Fluxus Z" style="height: 30px; margin-right: 10px; vertical-align: middle;"> Fluxus Z</div>
-                    <div class="app-version">
-                        <span>International - V3.0.6</span>
-                        <span class="status down">🔴 Down</span>
-                    </div>
-                    <div class="app-info">Phiên bản Fluxus Z quốc tế với tính năng mới.</div>
-                    <a href="#" class="download-btn disabled">Download</a>
-                </div>
+            <div class="button-group">
+                <button type="submit">✨ Tạo Link</button>
+                <button type="reset" class="btn-secondary">🔄 Xóa</button>
+            </div>
+        </form>
 
-                <div class="app-card">
-                    <div class="app-name"><img src="https://wearedevs.net/images/thumbnails/fluxus-z-111125.webp" alt="Fluxus Z" style="height: 30px; margin-right: 10px; vertical-align: middle;"> Fluxus Z</div>
-                    <div class="app-version">
-                        <span>VNG Official - V2.703</span>
-                        <span class="status online">🟢 Online</span>
-                    </div>
-                    <div class="app-info">Fluxus Z VNG bản mới nhất hiện tại - Hỗ trợ 32Bit & 64Bit, Font Chữ Thương.</div>
-                    <a href="https://www.mediafire.com/file/dqpjb2mf5h20p8j/FluxuZ+VNG+32Bit+&+64Bit+Font+Chữ+Thương.apk/file" class="download-btn">Download</a>
-                </div>
+        <div id="resultSection" class="result-section">
+            <h2 style="color: #333; margin-bottom: 20px;">📊 Kết quả</h2>
+
+            <div class="result-item">
+                <div class="result-label">API Key</div>
+                <div class="result-value" id="resultApiKey">-</div>
+                <button class="copy-btn" onclick="copyToClipboard('resultApiKey')">📋 Copy API Key</button>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">Random Suffix</div>
+                <div class="result-value" id="resultSuffix">-</div>
+                <button class="copy-btn" onclick="copyToClipboard('resultSuffix')">📋 Copy Suffix</button>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">📍 Raw Link (Chia sẻ cái này)</div>
+                <div class="result-value" id="resultLink">-</div>
+                <button class="copy-btn" onclick="copyToClipboard('resultLink')">📋 Copy Link</button>
+                <button class="copy-btn" onclick="openRawLink()" style="background: #17a2b8; margin-top: 5px;">🌐 Mở Link</button>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">📁 Đường dẫn File</div>
+                <div class="result-value" id="resultPath">-</div>
+                <button class="copy-btn" onclick="copyToClipboard('resultPath')">📋 Copy Path</button>
             </div>
         </div>
 
-        <!-- IOS Section -->
-        <div class="section">
-            <h2 class="section-title"><img src="https://images.seeklogo.com/logo-png/15/2/apple-logo-png_seeklogo-158010.png" alt="Apple" style="height: 50px; margin-right: 15px; vertical-align: middle;"> iOS</h2>
-            
-            <div class="apps-grid">
-                <div class="app-card">
-                    <div class="app-name"><img src="https://skibx.com/icon.png" alt="Skib X" style="height: 30px; margin-right: 10px; vertical-align: middle;"> Skib X</div>
-                    <div class="app-version">
-                        <span>VNG No Key - V2.701</span>
-                        <span class="status online">🟢 Online</span>
-                    </div>
-                    <div class="app-info">Skib X phiên bản VNG V2.701 No Key - Không cần key, dễ sử dụng và ổn định</div>
-                    <a href="https://nhapcode1s.com/ipas/SkibxVN_1765075400.ipa" class="download-btn">Download</a>
-                </div>
-
-                <div class="app-card">
-                    <div class="app-name"><img src="https://s3-eu-west-1.amazonaws.com/tpd/logos/6547387064519ebed7df6a08/0x0.png" alt="Delta X" style="height: 30px; margin-right: 10px; vertical-align: middle;"> Delta X</div>
-                    <div class="app-version">
-                        <span>VNG Official - V703</span>
-                        <span class="status online">🟢 Online</span>
-                    </div>
-                    <div class="app-info">Delta X V703 Fix Lỗi Mất Nút Di Chuyển Khi Chạy Script - Phiên bản VNG chính thức cho iOS</div>
-                    <a href="https://www.mediafire.com/file/jnmkwurdjq6430z/nPt35u4DMEU148JP.ipa/file" class="download-btn">Download</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>DRGTeam © 2024 - All Rights Reserved by HieuDRG</p>
-        <p style="margin-top: 10px; font-size: 0.85em;">Download the latest versions securely from here.</p>
-    </footer>
-
-    <!-- Modal Notification -->
-    <div id="downModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-title">⚠️ Client Không Hoạt Động</div>
-            <div class="modal-subtitle" id="clientName"></div>
-            <div class="modal-message">
-                Client Này Đã Không Còn Hoạt Động An Toàn<br><br>
-                Bạn Có Thể Thử Tải Bản Khác
-            </div>
-            <button class="modal-btn" onclick="closeModal()">Quay Lại Trang Chủ</button>
+        <div id="linksSection" class="links-list" style="display: none; margin-top: 30px; padding-top: 30px; border-top: 2px solid #e0e0e0;">
+            <h2 style="color: #333; margin-bottom: 20px;">📚 Danh sách Link</h2>
+            <div id="linksList"></div>
         </div>
     </div>
 
     <script>
-        function showDownModal(clientName) {
-            document.getElementById('clientName').textContent = clientName;
-            document.getElementById('downModal').classList.add('show');
-        }
+        let currentData = null;
 
-        function closeModal() {
-            document.getElementById('downModal').classList.remove('show');
-        }
+        document.getElementById('linkForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-        // Close modal when clicking outside
-        document.getElementById('downModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
+            const content = document.getElementById('content').value;
+            const contentType = document.getElementById('contentType').value;
+
+            if (!content.trim()) {
+                showStatus('Vui lòng nhập nội dung', 'error');
+                return;
+            }
+
+            showStatus('Đang tạo link...', 'loading');
+
+            try {
+                const response = await fetch('/api/create-link', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content,
+                        contentType
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    currentData = data;
+                    displayResult(data);
+                    showStatus('✓ Tạo link thành công!', 'success');
+                    loadLinks(data.apiKey);
+                } else {
+                    showStatus('Lỗi: ' + data.error, 'error');
+                }
+            } catch (error) {
+                showStatus('Lỗi: ' + error.message, 'error');
             }
         });
 
-        // Prevent download for down clients
-        document.querySelectorAll('.download-btn.disabled').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const clientName = this.closest('.app-card').querySelector('.app-name').textContent.trim();
-                showDownModal(clientName);
+        function displayResult(data) {
+            document.getElementById('resultApiKey').textContent = data.apiKey;
+            document.getElementById('resultSuffix').textContent = data.randomSuffix;
+            document.getElementById('resultLink').textContent = data.link;
+            document.getElementById('resultPath').textContent = data.filePath;
+
+            document.getElementById('resultSection').classList.add('show');
+        }
+
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = `status show ${type}`;
+
+            if (type !== 'loading') {
+                setTimeout(() => {
+                    statusEl.classList.remove('show');
+                }, 5000);
+            }
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Đã copy!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
             });
-        });
+        }
 
-        // Music Control
-        let isPlaying = true;
-        const musicBtn = document.getElementById('musicBtn');
-        const musicStatus = document.getElementById('musicStatus');
-        const musicPlayer = document.getElementById('musicPlayer');
-
-        function toggleMusic() {
-            isPlaying = !isPlaying;
-            if (isPlaying) {
-                musicBtn.textContent = '🎵 Nhạc Nền: BẬT';
-                musicStatus.textContent = '🔊 Đang phát';
-                musicStatus.style.color = '#22c55e';
-                musicPlayer.style.display = 'flex';
-            } else {
-                musicBtn.textContent = '🎵 Nhạc Nền: TẮT';
-                musicStatus.textContent = '🔇 Đã tắt';
-                musicStatus.style.color = '#ef4444';
-                musicPlayer.style.display = 'none';
+        function openRawLink() {
+            if (currentData) {
+                window.open(currentData.link, '_blank');
             }
+        }
+
+        async function loadLinks(apiKey) {
+            try {
+                const response = await fetch(`/api/links/${apiKey}`);
+                const data = await response.json();
+
+                if (data.success && data.links.length > 0) {
+                    const listEl = document.getElementById('linksList');
+                    listEl.innerHTML = data.links.map(link => `
+                        <div class="link-item">
+                            <div class="link-info">
+                                <div class="link-url">${link.link}</div>
+                                <div class="link-time">📅 ${new Date(link.timestamp).toLocaleString('vi-VN')}</div>
+                                <div class="link-time">📊 ${link.contentType} (${link.size} bytes)</div>
+                            </div>
+                            <div class="link-actions">
+                                <button onclick="copyLink('${link.link}')" style="background: #28a745;">Copy</button>
+                                <button onclick="window.open('${link.link}', '_blank')" style="background: #17a2b8;">Open</button>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    document.getElementById('linksSection').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Lỗi khi tải danh sách link:', error);
+            }
+        }
+
+        function copyLink(link) {
+            navigator.clipboard.writeText(link).then(() => {
+                showStatus('✓ Đã copy link!', 'success');
+            });
         }
     </script>
 </body>
