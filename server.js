@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
 // Directory for API keys and files
 const API_STORAGE_DIR = path.join(__dirname, 'apibot');
@@ -185,6 +185,9 @@ app.get('/api/links/:apiKey', (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// Serve static files (MUST BE LAST)
+app.use(express.static('public'));
 
 app.listen(PORT, () => {
   console.log(`✓ Server running at http://localhost:${PORT}`);
