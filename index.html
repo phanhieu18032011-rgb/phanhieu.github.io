@@ -350,7 +350,12 @@
             showStatus('Đang tạo link...', 'loading');
 
             try {
-                const response = await fetch('/api/create-link', {
+                // Detect if running on Netlify or localhost
+                const apiUrl = window.location.hostname.includes('netlify') 
+                    ? '/.netlify/functions/create-link'
+                    : '/api/create-link';
+
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -424,7 +429,11 @@
 
         async function loadLinks(apiKey) {
             try {
-                const response = await fetch(`/api/links/${apiKey}`);
+                const apiUrl = window.location.hostname.includes('netlify')
+                    ? `/.netlify/functions/links/${apiKey}`
+                    : `/api/links/${apiKey}`;
+
+                const response = await fetch(apiUrl);
                 const data = await response.json();
 
                 if (data.success && data.links.length > 0) {
