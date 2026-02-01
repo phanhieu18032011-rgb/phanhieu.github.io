@@ -46,6 +46,8 @@ function createApiStructure(apiKey) {
   return { apiDir, v1Dir };
 }
 
+// ========== API ROUTES (đặt trước general routes) ==========
+
 // Create a new raw link
 app.post('/api/create-link', (req, res) => {
   try {
@@ -88,33 +90,6 @@ app.post('/api/create-link', (req, res) => {
       success: false,
       error: error.message
     });
-  }
-});
-
-// Retrieve raw content via link
-app.get('/:apiKey/v1/:randomId', (req, res) => {
-  try {
-    const { apiKey, randomId } = req.params;
-    
-    const filePath = path.join(API_STORAGE_DIR, apiKey, 'v1', `${randomId}.txt`);
-    
-    // Security check: ensure file is within apibot directory
-    if (!filePath.startsWith(API_STORAGE_DIR)) {
-      return res.status(403).json({ error: 'Forbidden' });
-    }
-    
-    if (!fs.existsSync(filePath)) {
-      return res.status(404).json({ error: 'Link not found' });
-    }
-    
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
-    const data = JSON.parse(fileContent);
-    
-    // Return as raw content
-    res.setHeader('Content-Type', data.contentType || 'text/plain');
-    res.send(data.content);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
   }
 });
 
@@ -181,6 +156,35 @@ app.get('/api/links/:apiKey', (req, res) => {
       });
     
     res.json({ success: true, apiKey, links });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ========== GENERAL RAW CONTENT ROUTE (đặt sau API routes) ==========
+
+// Retrieve raw content via link
+app.get('/:apiKey/v1/:randomId', (req, res) => {
+  try {
+    const { apiKey, randomId } = req.params;
+    
+    const filePath = path.join(API_STORAGE_DIR, apiKey, 'v1', `${randomId}.txt`);
+    
+    // Security check: ensure file is within apibot directory
+    if (!filePath.startsWith(API_STORAGE_DIR)) {
+      return res.status(403).json({ error: 'Forbidden' });
+    }
+    
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'Link not found' });
+    }
+    
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    const data = JSON.parse(fileContent);
+    
+    // Return as raw content
+    res.setHeader('Content-Type', data.contentType || 'text/plain');
+    res.send(data.content);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
