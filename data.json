@@ -1,0 +1,66 @@
+﻿{
+  "site": {
+    "title": "DRGteam Mode",
+    "owner": "HieuDRG"
+  },
+  "downloads": {
+    "android": [
+      {
+        "name": "Delta X (quốc tế)",
+        "version": "V2.702.662",
+        "tag": "Delta X",
+        "note": "Phiên bản quốc tế, tối ưu hiệu năng.",
+        "online": false,
+        "logo": "https://cdn.hstatic.net/files/200001134609/file/delta-x-official-logo-photoroom.png",
+        "link": "https://delta.filenetwork.vip/android.html"
+      },
+      {
+        "name": "Delta X (VNG chính thức không cần file login)",
+        "version": "V2.702.632",
+        "tag": "Delta X",
+        "note": "Bản VNG chính thức, không cần file login.",
+        "online": true,
+        "logo": "https://cdn.hstatic.net/files/200001134609/file/delta-x-official-logo-photoroom.png",
+        "link": "https://www.mediafire.com/file/0c19asxqi360r10/Delta_Vng_V2.702.632_Up.apk/file"
+      },
+      {
+        "name": "Fluxus Z (quốc tế)",
+        "version": "V3.0.6",
+        "tag": "Fluxus Z",
+        "note": "ARM64, hỗ trợ đầy đủ tính năng.",
+        "online": false,
+        "logo": "https://cdn.hstatic.net/files/200001134609/file/images.jfif",
+        "link": "https://www.mediafire.com/file/7iizmrzio32qsve/FluxusZ+V3.0.6+ARM64.apk/file"
+      },
+      {
+        "name": "Fluxus Z (VNG chính thức)",
+        "version": "V3.0.6",
+        "tag": "Fluxus Z",
+        "note": "Bản VNG chính thức, tối ưu cho ARM64.",
+        "online": true,
+        "logo": "https://cdn.hstatic.net/files/200001134609/file/images.jfif",
+        "link": "https://www.mediafire.com/file/v2iuh5a7klnu84j/FluxusZ+V3.0.6+VNG+ARM64.apk/file"
+      }
+    ],
+    "ios": [
+      {
+        "name": "Update Link Cài Trực Tiếp Skibx VNG IOS V2.704 Bản Mới Nhất Fix Lỗi Internet, Fix Lỗi Không Toàn Vẹn (thay thế cho Krnl) Lưu Ý: Nhớ Xoá Bỏ Cấu Hình DNS Khoind Trước Khi Cài Delta VNG IOS Nhé Ae ",
+        "version": "V2.704",
+        "tag": "Skib X",
+        "note": "NgocBongGaming",
+        "online": true,
+        "logo": "https://cdn.hstatic.net/files/200001134609/file/skib-x-executor-photoroom.png",
+        "link": "https://toplinks.io/PmDxAFo"
+      },
+      {
+        "name": "Delta VNG IOS",
+        "version": "V50",
+        "tag": "Delta X",
+        "note": "HuyMyThicIOS",
+        "online": true,
+        "logo": "https://cdn.hstatic.net/files/200001134609/file/delta-x-official-logo-photoroom.png",
+        "link": "https://link4m.com/go/xD97ry"
+      }
+    ]
+  }
+}
