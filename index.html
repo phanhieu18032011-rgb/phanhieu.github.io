@@ -1,51 +1,24 @@
-﻿<!doctype html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DRGteam Mode — HieuDRG</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Bacon Bypass Tool</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <header class="hero">
-      <div class="hero-top">
-        <div class="badge">DRGteam Mode</div>
-        <button class="theme-toggle" id="theme-toggle" type="button">Chế độ: Dark</button>
-      </div>
-      <h1 class="title" id="site-title">Kho Tải Về DRGteam</h1>
-      <p class="subtitle" id="site-subtitle">Trang tải về được thiết kế theo phong cách chuyên nghiệp, tối ưu trải nghiệm, bản quyền thuộc <span class="credit" id="site-owner">HieuDRG</span>.</p>
-      <div class="divider"></div>
-    </header>
 
-    <section class="section">
-      <h2>
-        <img class="os-logo" src="https://cdn.hstatic.net/files/200001134609/file/android_logo_2019-photoroom.png" alt="Android logo" />
-        ANDROID
-      </h2>
-      <div class="grid" id="android-grid"></div>
-    </section>
+<div class="container">
+  <h1>🔓 Bacon Bypass Tool</h1>
 
-    <section class="section">
-      <h2>
-        <img class="os-logo" src="https://cdn.hstatic.net/files/200001134609/file/o-scalable-vector-graphics-free-download-of-ios-icon-clipart-photoroom.png" alt="iOS logo" />
-        IOS
-      </h2>
-      <div class="grid" id="ios-grid"></div>
-    </section>
+  <input type="text" id="url" placeholder="Nhập link cần bypass...">
+  <input type="text" id="apikey" placeholder="Nhập Bacon API Key...">
 
-    <div class="note" id="note">
-      Lưu ý: Các nút tải về bên trên dẫn trực tiếp tới nguồn cung cấp. Vui lòng kiểm tra thiết bị và kết nối mạng ổn định trước khi tải.
-    </div>
+  <button onclick="bypass()">Bypass</button>
 
-    <div class="status" id="status" aria-live="polite"></div>
+  <div id="result"></div>
+</div>
 
-    <footer>
-      Bản quyền thuộc <span class="credit" id="footer-owner">HieuDRG</span> • <span id="footer-title">DRGteam Mode</span>
-    </footer>
-  </div>
-
-  <script src="app.js"></script>
+<script src="script.js"></script>
+<script src="config.js"></script>
 </body>
 </html>
-
